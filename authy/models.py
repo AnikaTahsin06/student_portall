@@ -30,12 +30,15 @@ def user_directory_path_banner(instance, filename):
 # Create your models here.
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+	token = models.CharField(max_length=150, default="")
+	verify = models.BooleanField(default=False)
 	location = models.CharField(max_length=50, null=True, blank=True)
 	url = models.CharField(max_length=80, null=True, blank=True)
 	profile_info = models.TextField(max_length=150, null=True, blank=True)
 	created = models.DateField(auto_now_add=True)
 	picture = models.ImageField(upload_to=user_directory_path_profile, blank=True, null=True, verbose_name='Picture')
 	banner = models.ImageField(upload_to=user_directory_path_banner, blank=True, null=True, verbose_name='Banner')
+
 
 	def save(self, *args, **kwargs):
 		super().save(*args, **kwargs)
@@ -54,7 +57,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 	if created:
 		Profile.objects.create(user=instance)
 
-def save_user_profile(sender, instance, **kwargs):
+def save_user_profile(sender, instance,**kwargs):
 	instance.profile.save()
 
 

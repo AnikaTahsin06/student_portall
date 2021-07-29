@@ -13,10 +13,20 @@
   <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-
+  <nav class="light-blue" role="navigation">
+    <div class="nav-wrapper container">
+      <a href="{% url 'home' %}" class="brand-logo"><i class="material-icons">cloud</i>Student Portal</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{% url 'login' %}" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons left">person</i>Login</a></li>
+      </ul>
+       
+    </div>
+  </nav>
+  <br>
+  <br>
+  <br>
   <div class="row center-align">
     <div class="col s6 offset-s3">
-      <h4>Students Portal</h4>
       <div class="card">
           <form method="post" action="" role="form">
           {% csrf_token %}
@@ -46,6 +56,7 @@
           Login
         </button>
       </p>
+      <a href="{% url 'password_reset' %}">forget password</a><br><br><br>
     </div>
 
     <input type="hidden" name="next" value="{{ next }}">
@@ -54,10 +65,53 @@
 
     <a href="{% url 'signup' %}" class="btn waves-effect waves-light">Create an account</a>
   </form>
+  <br>
 
   </div>
   </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<footer class="page-footer orange">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">Company Bio</h5>
+        <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+      </div>
+      <div class="col l3 s12">
+        <h5 class="white-text">Settings</h5>
+        <ul>
+          <li><a class="white-text" href="#!">Link 1</a></li>
+          <li><a class="white-text" href="#!">Link 2</a></li>
+          <li><a class="white-text" href="#!">Link 3</a></li>
+          <li><a class="white-text" href="#!">Link 4</a></li>
+        </ul>
+      </div>
+      <div class="col l3 s12">
+        <h5 class="white-text">Connect</h5>
+        <ul>
+          <li><a class="white-text" href="#!">Link 1</a></li>
+          <li><a class="white-text" href="#!">Link 2</a></li>
+          <li><a class="white-text" href="#!">Link 3</a></li>
+          <li><a class="white-text" href="#!">Link 4</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+    Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Anika</a>
+    </div>
+  </div>
+</footer>
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="{% static 'js/materialize.js' %}"></script>

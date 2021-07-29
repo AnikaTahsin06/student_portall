@@ -47,9 +47,9 @@ def CourseModules(request, course_id):
 	context = {
 		'teacher_mode': teacher_mode,
 		'course': course,
-		#'page_completions': page_completions,
-		#'quiz_completions': quiz_completions,
-		#'assignment_completions': assignment_completions,
+		'page_completions': page_completions,
+		'quiz_completions': quiz_completions,
+		'assignment_completions': assignment_completions,
 	}
 
 	return render(request, 'module/modules.html', context)

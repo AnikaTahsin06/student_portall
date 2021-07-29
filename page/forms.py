@@ -9,4 +9,4 @@ class NewPageForm(forms.ModelForm):
 
 	class Meta:
 		model = Page
-		fields = ('title', 'content', 'files')
+		fields = ('title','content', 'files')

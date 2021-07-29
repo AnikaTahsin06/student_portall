@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'ckeditor',
     'ckeditor_uploader',
     'authy',
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     'question',
     'completion',
     'direct',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -148,3 +150,14 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#gmail_send/settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'anikabushra6543@gmail.com'
+EMAIL_HOST_PASSWORD = 'tahani516054' #past the key or password app here
+
+DEFAULT_FROM_EMAIL = 'anikabushra6543@gmail.com'
+

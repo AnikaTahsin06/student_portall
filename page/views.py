@@ -5,7 +5,7 @@ from django.http import HttpResponseForbidden
 from page.models import Page, PostFileContent
 from classroom.models import Course
 from module.models import Module
-#from completion.models import Completion
+from completion.models import Completion
 
 from page.forms import NewPageForm
 
@@ -50,11 +50,11 @@ def NewPageModule(request, course_id, module_id):
 
 def PageDetail(request, course_id, module_id, page_id):
 	page = get_object_or_404(Page, id=page_id)
-	#completed = Completion.objects.filter(course_id=course_id, user=request.user, page_id=page_id).exists()
+	completed = Completion.objects.filter(course_id=course_id, user=request.user, page_id=page_id).exists()
 
 	context = {
 		'page': page,
-		#'completed': completed,
+		'completed': completed,
 		'course_id': course_id,
 		'module_id': module_id,
 	}
@@ -65,5 +65,5 @@ def MarkPageAsDone(request, course_id, module_id, page_id):
 	user = request.user
 	page = get_object_or_404(Page, id=page_id)
 	course = get_object_or_404(Course, id=course_id) 
-	#Completion.objects.create(user=user, course=course, page=page)
+	Completion.objects.create(user=user, course=course, page=page)
 	return redirect('modules', course_id=course_id)

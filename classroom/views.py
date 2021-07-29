@@ -52,6 +52,7 @@ def NewCourse(request):
 	else:
 		form = NewCourseForm()
 
+
 	context = {
 		'form': form,
 	}
@@ -129,6 +130,7 @@ def EditCourse(request, course_id):
 def MyCourses(request):
 	user = request.user
 	courses = Course.objects.filter(user=user)
+
 
 	context = {
 		'courses': courses

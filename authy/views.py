@@ -1,13 +1,24 @@
 from django import template
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic.base import View
 from authy.forms import SignupForm, ChangePasswordForm, EditProfileForm
 from django.contrib.auth.models import User
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from .utils import generate_token
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.db.models import Sum
 
 from authy.models import Profile
+import uuid
 from django.db import transaction
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
@@ -17,7 +28,23 @@ from django.core.paginator import Paginator
 
 from django.urls import resolve
 
+import threading
+
+
+class EmailThread(threading.Thread):
+
+    def __init__(self, email_message):
+        self.email_message = email_message
+        threading.Thread.__init__(self)
+
+    def run(self):
+        self.email_message.send()
+
 # Create your views here.
+def home(request):
+    template = "home.html"
+    context = {}
+    return render(request, template, context)
 
 def SideNavInfo(request):
 	user = request.user
@@ -48,7 +75,31 @@ def Signup(request):
 			username = form.cleaned_data.get('username')
 			email = form.cleaned_data.get('email')
 			password = form.cleaned_data.get('password')
-			User.objects.create_user(username=username, email=email, password=password)
+			user = User.objects.create_user(username=username, email=email, password=password)
+			user.is_active = False
+			user.save()
+			current_site = 'http://127.0.0.1:8000'
+			email_subject = 'Active your Account'
+			message = render_to_string('registration/activate.html',
+                                   {
+                                       'user': user,
+                                       'domain': 'http://127.0.0.1:8000',
+                                       'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                                       'token': generate_token.make_token(user)
+                                   }
+                                   )
+			email_message = EmailMessage(
+            email_subject,
+            message,
+            settings.EMAIL_HOST_USER,
+            [email]
+            )
+			EmailThread(email_message).start()
+			messages.add_message(request, messages.SUCCESS,
+                            'account created succesfully')
+
+             
+			 
 			return redirect('login')
 	else:
 		form = SignupForm()
@@ -111,3 +162,17 @@ def EditProfile(request):
 	}
 
 	return render(request, 'registration/edit_profile.html', context)
+
+
+def activate(request,uidb64,token):
+	try:
+		uid =  urlsafe_base64_decode(uidb64).decode()
+		user = User.objects.get(pk=uid)
+	except Exception as identifier:
+		user = None
+	if user is not None and generate_token.check_token(user, token):
+		user.is_active = True
+		user.save()
+		messages.add_message(request, messages.SUCCESS,'account activated successfully')
+		return redirect('login')
+	return render(request, 'registration/activate_failed.html', status=401)
