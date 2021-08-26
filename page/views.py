@@ -28,13 +28,14 @@ def NewPageModule(request, course_id, module_id):
 				title = form.cleaned_data.get('title')
 				content = form.cleaned_data.get('content')
 				files = request.FILES.getlist('files')
+				content2 = form.cleaned_data.get('content')
 
 				for file in files:
 					file_instance = PostFileContent(file=file, user=user)
 					file_instance.save()
 					files_objs.append(file_instance)
 
-				p = Page.objects.create(title=title, content=content, user=user)
+				p = Page.objects.create(title=title, content=content,content2=content2, user=user)
 				p.files.set(files_objs)
 				p.save()
 				module.pages.add(p)
@@ -59,6 +60,7 @@ def PageDetail(request, course_id, module_id, page_id):
 		'module_id': module_id,
 	}
 	return render(request, 'page/page.html', context)
+
 
 
 def MarkPageAsDone(request, course_id, module_id, page_id):

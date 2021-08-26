@@ -38,7 +38,7 @@ class Course(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	picture = models.ImageField(upload_to=user_directory_path)
 	title = models.CharField(max_length=200)
-	description = models.CharField(max_length=300)
+	description = models.CharField(max_length=800)
 	category = models.ForeignKey(Category, on_delete=models.CASCADE)
 	syllabus = RichTextField()
 	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='course_owner')

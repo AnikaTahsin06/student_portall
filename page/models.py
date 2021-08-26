@@ -25,6 +25,7 @@ class Page(models.Model):
 	title = models.CharField(max_length=150)
 	content = RichTextField()
 	files = models.ManyToManyField(PostFileContent)
+	content2 = RichTextField(default="")
 	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='page_owner')
 
 	def __str__(self):

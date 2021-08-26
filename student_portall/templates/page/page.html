@@ -12,7 +12,6 @@
   <div class="col s12">
     {{ page.content | safe }}
   </div>
-
   {% for file in page.files.all %}
   <div class="row d-flex justify-content-center mb-3">
     <div id="player-overlay">
@@ -22,13 +21,17 @@
     </div>
   </div>
   {% endfor %}
-
+  <div class="col s12">
+    {{ page.content2 | safe }}
+  </div>
   {% if completed != True %}
   <div class="col s12 center-align">
     <a class="btn-large" href="{% url 'mark-page-as-done' course_id module_id page.id %}"><i
         class="material-icons">done</i>Mark as done</a>
   </div>
   {% endif %}
+ 
+   
 
 </div>
 

@@ -36,7 +36,9 @@
   </ul>
 <div class="center-align">
   <a href="{% url 'user-search' %}" class="waves-effect waves-light btn-large"><i class="material-icons right">search</i>Search a user in your courses</a>
+  {% if user.profile.user_type == 'teacher' %}
   <a href="{% url 'broadcast' %}" class="waves-effect waves-light btn-large"><i class="material-icons right">sensors</i>Send a broadcast message</a>
+  {% endif %}
   <a href="{% url 'people-we-can-message' %}" class="waves-effect waves-light btn-large"><i class="material-icons right">person</i>Compose a message</a>
 </div>
 

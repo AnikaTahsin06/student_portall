@@ -1,0 +1,28 @@
+{% extends 'home.html' %}
+{% load static %}
+
+        
+{% block content %}
+
+{% load crispy_forms_tags %}  
+  
+  <!--Password Reset Confirm-->
+    <div class="container p-5">
+    {% if registered %}
+        <h1>Thank you for registering. Now fill-up this form</h1>
+        <hr>
+        <a class="btn-large orange" href="{% url 'edit-profile' %}">Enter</a>
+    {% else %}
+	    <h2 class="font-weight-bold mt-3">Teacher registration form</h2>
+		<hr>
+        <p>Please enter your basic informations.</p>
+        <form method="POST">
+            {% csrf_token %}
+            {{ user_form|crispy }}
+            <!-- {{ profile_form|crispy }}                    -->
+            <button class="btn btn-primary" type="submit">Registration</button>
+        </form>
+    {% endif %}
+    </div>
+
+{% endblock %}

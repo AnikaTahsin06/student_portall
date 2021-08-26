@@ -5,6 +5,7 @@
     $('select').formSelect();
     $('.collapsible').collapsible();
     $('.datepicker').datepicker({format:'yyyy-mm-dd'});
+	$('.tabs').tabs();
 
     //for the answer vote
     $(".vote").click(function(){
@@ -41,3 +42,19 @@
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space
+
+//Slider
+const slider = document.querySelector('.slider');
+M.Slider.init(slider, {
+	indicators: false,
+	height: 500,
+	interval: 6000
+});
+
+//questionsPart
+const accordion = document.getElementsByClassName('contentBx');
+for(i=0; i<accordion.length; i++){
+	accordion[i].addEventListener('click', function(){
+		this.classList.toggle('active')
+	})
+}

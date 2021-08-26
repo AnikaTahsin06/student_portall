@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib import auth, messages
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,6 +27,8 @@ SECRET_KEY = 'django-insecure-!h6elc=vex*tz+i9lfq&1@69+3^@gg-438*x7sr(8m&1+#zmhk
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+#AUTH_USER_MODEL = 'authy.User'
 
 
 # Application definition
@@ -139,7 +142,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #Login
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = '/user/login'
 
@@ -160,4 +163,8 @@ EMAIL_HOST_USER = 'anikabushra6543@gmail.com'
 EMAIL_HOST_PASSWORD = 'tahani516054' #past the key or password app here
 
 DEFAULT_FROM_EMAIL = 'anikabushra6543@gmail.com'
+
+MESSAGE_TAGS={
+    messages.ERROR:'danger'
+}
 

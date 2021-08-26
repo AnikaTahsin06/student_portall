@@ -12,3 +12,81 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+#intro {
+  height: 100%;
+}
+
+#intro {
+  background:linear-gradient(rgba(0, 0, 0, 0.342), rgba(0, 0, 0, 0.7)), url("https://adatis.co.uk/wp-content/uploads/front.png")no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-light{
+  background-color:transparent !important;
+  transition:0.5s ease;
+  }
+
+.bg-light.scrolled{
+  background-color: #18445dd5 !important;
+}
+
+.section-search input {
+  padding: 5px !important;
+  font-size: 18px !important;
+  width: 90% !important;
+  border: #f4f4f4 3px solid !important;
+}
+
+.tabs .indicator{
+  background-color: rgba(25, 67, 78, 0.972);
+}
+.tabs .tab a:focus, .tabs .tab a:focus.active{
+  background: transparent;
+}
+@media  screen and (max-width: 670px) {
+  header{
+    min-height: 500px;
+  }
+}
+
+.accordion{
+  max-width: 1000px;
+}
+
+.accordion .contentBx{
+  position: relative;
+  margin: 10px 20px;
+}
+.accordion .contentBx .label{
+  position: relative;
+  padding: 10px;
+  background: #28b3ac;
+  color: #ffff;
+  cursor: pointer;
+}
+.accordion .contentBx .label::before{
+  content: '+';
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 1.5em;
+}
+.accordion .contentBx.active .label::before{
+  content: '-';
+}
+.accordion .contentBx .content{
+  position: relative;
+  background: #ffff;
+  height: 0;
+  overflow: hidden;
+  transition: 0.5s;
+  overflow-y: auto;
+}
+.accordion .contentBx.active .content{
+  height: 150px;
+  padding: 10px;
+}

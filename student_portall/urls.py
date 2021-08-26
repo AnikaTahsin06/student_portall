@@ -17,8 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from authy.views import UserProfile
+from authy.views import UserProfile,home
 from classroom.views import index
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +28,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('direct/', include('direct.urls')),
     path('<username>', UserProfile, name='profile'),
-    path('', index, name='index'),
+    path('', home, name='home'),
+    path('dashboard/', index, name='index'),
+     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

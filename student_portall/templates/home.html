@@ -1,87 +1,209 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Starter Template - Materialize</title>
+{% block content %}
+<section class="slider">
+  <ul class="slides">
+    <li>
+      <img src="{% static 'img/slider.jpg' %}"> <!-- random image -->
+      <div class="caption center-align">
+        <h3>This is our big Tagline!</h3>
+        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+      </div>
+    </li>
+    <li>
+      <img src="{% static 'img/slider.jpg' %}"> <!-- random image -->
+      <div class="caption left-align">
+        <h3>Left Aligned Caption</h3>
+        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+      </div>
+    </li>
+    <li>
+      <img src="{% static 'img/slider.jpg' %}"> <!-- random image -->
+      <div class="caption right-align">
+        <h3>Right Aligned Caption</h3>
+        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+      </div>
+    </li>
+    <li>
+      <img src="{% static 'img/slider.jpg' %}"> <!-- random image -->
+      <div class="caption center-align">
+        <h3>This is our big Tagline!</h3>
+        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+      </div>
+    </li>
+  </ul>
+</section>
 
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
-</head>
-<body>
-
-
-  <nav class="light-blue" role="navigation">
-    <div class="nav-wrapper container">
-      <a href="{% url 'home' %}" class="brand-logo"><i class="material-icons">cloud</i>Student Portal</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="{% url 'login' %}" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons left">person</i>Login</a></li>
-      </ul>
-       
-    </div>
-  </nav>
+<!--Search-->
+<section id="search" class="section section-search #00695c teal darken-3 white-text center scrollspy">
   <div class="container">
-      <h1>Body</h1>
+    <div class="row">
+      <div class="col s12">
+        <h5 id="searchh">Search Courses</h5>
+        <div class="input-field" style="height: 20px;">
+           <form action="{% url 'search' %}" method="GET">
+            <input type="text" name="keyword" placeholder="Search course name here.." required style="height: 25px;">
+            <button>Search</button>
+           </form>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
+
+<section>
   <div class="container">
-    <div class="section">
-  
-      {% block content %}
-      {% endblock %}
+    <h2 class="center" style="color: rgba(0, 41, 41, 0.657);">Categories</h2><hr>
+    <div class="row">
+      {% for category in categories %}
+      <div class="col s12 m4">
+        <a href="{% url 'category-courses' category.slug %}">
+          <div class="card-panel teal center-align white-text">
+            <i class="material-icons large">{{ category.icon }}</i>
+            <h5><b>{{ category.title }}</b></h5>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
     </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      {% for course in course %}
+      <div class="col s12 m4">
+        <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="{{ course.picture.url }}">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4"><b>{{ course.title }}</b><i
+              class="material-icons right">more_vert</i></span>
+            <p class="title"><b>{{ course.enrolled.count }}</b> Students</p>
+            <a href="{% url 'enroll' course.id %}" class="btn">Enroll</a>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">About<i class="material-icons right">close</i></span>
+            <p>{{ course.description }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
-    <br>
-    <br>
+  </div>
+</section>
 
-<footer class="page-footer orange">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Company Bio</h5>
-          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
+<section class="section section-icons grey lighten-4 center">
+  <div class="container">
+    <div class="row">
+      {% for teacher in teachers %}
+      <div class="col s12 m4">
+        <div class="card-panel">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="{{ profile.picture.url }}">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title" style="color:#18445dd5;">{{ teacher.user.username}}</h5>
+              <p class="card-title">{{ teacher.user.first_name }} {{ teacher.user.last_name }}</p>
+              <p class="card-text">{{teacher.user.email}}</p>
+              <p class="card-text"><small class="text-muted">{{teacher.user.profile_info}}</small></p>
+            </div>
+          </div>
         </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- services section -->
+<br><br>
+<div class="container services" id="services">
+  <div class="col s12 16 offset-12 center">
+    <ul class="tabs">
+      <li class="tab col s6">
+        <a href="#section1" class="indigo-text text-darken-4"><b>Which services we provide</b></a>
+      </li>
+      <li class="tab col s6">
+        <a href="#section2" class="indigo-text text-darken-4"><b>Course related questions and answer</b></a>
+      </li>
+    </ul>
+    <br>
+    <div class="row" id="section1">
+      <div class="col s12  m4 13 center-align">
+        <div class="card">
+          <div class="card-content">
+            <i class="material-icons large">aspect_ratio</i>
+            <h5>Web Development</h5>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet impedit nostrum excepturi sequi incidunt error eaque aspernatur a id dolor nisi, dicta architecto nesciunt modi labore ipsam mollitia provident! Officia!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod amet  
+            </p>
+          </div>
         </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
+      </div>
+      <div class="col s12  m4 13 center-align">
+        <div class="card">
+          <div class="card-content">
+            <i class="material-icons large">aspect_ratio</i>
+            <h5>Web Development</h5>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet impedit nostrum excepturi sequi incidunt error eaque aspernatur a id dolor nisi, dicta architecto nesciunt modi labore ipsam mollitia provident! Officia!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod amet  
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col s12  m4 13 center-align">
+        <div class="card">
+          <div class="card-content">
+            <i class="material-icons large">aspect_ratio</i>
+            <h5>Web Development</h5>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet impedit nostrum excepturi sequi incidunt error eaque aspernatur a id dolor nisi, dicta architecto nesciunt modi labore ipsam mollitia provident! Officia!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod amet  
+            </p>
+          </div>
         </div>
       </div>
     </div>
-    <div class="footer-copyright">
+    <div class="row" id="section2">
       <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Anika</a>
+        <h1>Another section</h1>
       </div>
     </div>
-  </footer>
+  </div>
+</div>
+<div style="background-color: rgba(195, 220, 240, 0.65);">
+  <br><br>
+  <h4 class="teal-text text-darken-3 center"><b>Questions and Answering Section</b></h4>
+  <br><br>
+  <div class="container">
+    <div class="accordion">
+      <div class="contentBx">
+        <div class="label">List One</div>
+        <div class="content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem recusandae nemo deleniti praesentium! Fugiat aliquid consectetur repellat eos deleniti sapiente aperiam architecto itaque sequi alias asperiores, officia, earum ipsam minus? Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium nulla laboriosam reprehenderit provident deleniti fugiat facilis quas, tempore explicabo totam dicta. Rem minus fugiat maxime culpa commodi, veniam impedit incidunt! Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti a culpa nostrum labore ipsa quasi reprehenderit cupiditate non reiciendis doloremque facilis in explicabo dolor temporibus id, totam earum accusamus alias! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi incidunt alias odio, veniam dolor dolores repudiandae ipsa sequi nemo ducimus voluptatem earum dolore saepe maxime cupiditate doloremque laborum impedit aspernatur.</p>
+        </div>
+      </div>
+      <div class="contentBx">
+        <div class="label">List One</div>
+        <div class="content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem recusandae nemo deleniti praesentium! Fugiat aliquid consectetur repellat eos deleniti sapiente aperiam architecto itaque sequi alias asperiores, officia, earum ipsam minus?</p>
+        </div>
+      </div>
+      <div class="contentBx">
+        <div class="label">List One</div>
+        <div class="content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem recusandae nemo deleniti praesentium! Fugiat aliquid consectetur repellat eos deleniti sapiente aperiam architecto itaque sequi alias asperiores, officia, earum ipsam minus?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+</div>
+ 
 
 
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="{% static 'js/materialize.js' %}"></script>
-  <script src="{% static 'js/init.js' %}"></script>
-  <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
-  <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
-
-
-
-</body>
-</html>
+{% endblock %}

@@ -2,88 +2,145 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
   <title>Starter Template - Materialize</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
-<body>
+
+<body id="home" class="scrollspy">
 
 
-  <nav class="light-blue" role="navigation">
-    <div class="nav-wrapper container">
-      <a href="{% url 'index' %}" class="brand-logo"><i class="material-icons">cloud</i>Student Portal</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons left">person</i>Profile</a></li>
-      </ul>
-      <ul id="nav-mobile" class="sidenav">
-        <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons left">person</i>Profile</a></li>
-      </ul>
-    </div>
-  </nav>
+  <div class="navbar-fixed">
+    <nav class="#00695c teal darken-3">
+      <div class="nav-wrapper container">
+        <a href="{% url 'home' %}" class="brand-logo">BrainAxis</a>
+        <ul class="right hide-on-med-and-down">
+          <li>
+            <a href="{% url 'home' %}"><b><i class="material-icons left">home</i>Home</b></a>
+          </li>
+          {% if user.is_authenticated and user.profile.user_type == 'teacher' %}
+          <li>
+            <a href="{% url 'my-courses' %}"><b>My Courses</b></a>
+          </li>
+          {% elif user.is_authenticated and user.profile.user_type == 'student' %}
+          <li>
+            <a href="{% url 'index' %}"><b>My Classes</b></a>
+          </li>
+          {% else %}
+          <li>
+            <a href="#"><b>Servises</b></a>
+          </li>
+          {% endif %}
+          <li>
+            <a href="{% url 'contact' %}"><b>Contact</b></a>
+          </li>
+          <li>
+            <a href="#searchh"><b><i class="material-icons left">find_in_page</i>Search</b></a>
+          </li>
+           
+          {% if user.is_authenticated %}
+          <li>
+            <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i
+                class="material-icons left">person_outline</i><b>Profile</b></a>
+          </li>
+          {% else %}
+          <li>
+            <!-- {% url 'register' %} -->
+            <a href="{% url 'login' %}"><b>Login/Register</b></a>
+          </li>
+          {% endif %}
+           
 
+        </ul>
+        <ul id="nav-mobile" class="sidenav">
+          <li>
+            <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large">
+              <i class="material-icons left">person</i>
+              Profile
+            </a>
+          </li>
+        </ul>
 
-
-  <ul id="slide-out" class="sidenav">
-    <li><div class="user-view">
-      <div class="background">
-        {% if nav_profile.banner %}
-          <img src="{{ nav_profile.banner.url }}">
-        {% else %}
-          <img src="{% static 'img/nobanner.jpg' %}">
-        {% endif %}
+        <!-- {% if user.is_authenticated %}
+        {% endif %} -->
       </div>
-      <a href="#user">
-      {% if nav_profile.picture %}
-        <img src="{{ nav_profile.picture.url }}" class="circle responsive-img">
-      {% else %}
-        <img src="{% static 'img/no_avatar.jpg' %}" class="circle responsive-img">
-      {% endif %} 
-      </a>
-      <a href="#name"><span class="white-text name">{{ nav_profile.user.first_name }} {{ nav_profile.user.last_name }}</span></a>
-      <a href="#email"><span class="white-text email">{{ nav_profile.user.email }}</span></a>
-    </div>
+    </nav>
+  </div>
+
+
+ {% if user.is_authenticated %}
+  <ul id="slide-out" class="sidenav">
+    <li>
+      <div class="user-view">
+        <div class="background">
+          {% if nav_profile.banner %}
+          <img src="{{ nav_profile.banner.url }}">
+          {% else %}
+          <img src="{% static 'img/nobanner.jpg' %}">
+          {% endif %}
+        </div>
+        <a href="#user">
+          {% if nav_profile.picture %}
+          <img src="{{ nav_profile.picture.url }}" class="circle responsive-img">
+          {% else %}
+          <img src="{% static 'img/no_avatar.jpg' %}" class="circle responsive-img">
+          {% endif %}
+        </a>
+        <a href="#name"><span class="white-text name">{{ nav_profile.user.first_name }} {{ nav_profile.user.last_name}}</span></a>
+        <a href="#email"><span class="white-text email">{{ nav_profile.user.email }}</span></a>
+      </div>
     </li>
     <li><a href="{% url 'profile' nav_profile.user.username %}"><i class="material-icons">person</i>My profile</a></li>
+    {% if user.profile.user_type == 'student' %}
     <li><a href="{% url 'index' %}"><i class="material-icons">dashboard</i>Dashboard</a></li>
-    <li><div class="divider"></div></li>
+    {% endif %}
+    <li>
+      <div class="divider"></div>
+    </li>
     <li><a class="subheader">Learning</a></li>
     <li><a href="{% url 'categories' %}"><i class="material-icons">menu_book</i>Courses</a></li>
-    <li><a href="{% url 'inbox' %}"><i class="material-icons">inbox</i>Inbox{% if directs_count %}<span class="new badge red">{{ directs_count }}</span>{% endif %}</a></li>
+    <li><a href="{% url 'inbox' %}"><i class="material-icons">inbox</i>Inbox{% if directs_count %}<span
+          class="new badge red">{{ directs_count }}</span>{% endif %}</a></li>
     <li><a href=""><i class="material-icons">circle_notifications</i>Notifications</a></li>
-    <li><div class="divider"></div></li>
-    
+    <li>
+      <div class="divider"></div>
+    </li>
+    {% if user.profile.user_type == 'teacher' %}
     <li><a class="subheader">Teaching</a></li>
     <li><a href="{% url 'my-courses' %}"><i class="material-icons">menu_book</i>Your courses</a></li>
-    <li><div class="divider"></div></li>
-    
+    <li>
+      <div class="divider"></div>
+    </li>
+    {% endif %}
+
     <li><a href="{% url 'logout' %}"><i class="material-icons">power_off</i>Log out</a></li>
   </ul>
+  {% endif %}
 
 
-    {% block banner %}
-    {% endblock %}
+  {% block banner %}
+  {% endblock %}
+
+   
+
+    <div>
+
+      {% block content %}
+      {% endblock %}
+    </div>
+   
+   
 
 
 
-<div class="container">
-  <div class="section">
-
-    {% block content %}
-    {% endblock %}
-  </div>
-  </div>
-  <br>
-  <br>
-
-
-
-  <footer class="page-footer orange">
+  <footer class="page-footer #00695c teal darken-3">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
@@ -130,5 +187,6 @@
   {% block javascript %}
   {% endblock %}
 
-  </body>
-  </html>
+</body>
+
+</html>

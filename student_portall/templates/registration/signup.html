@@ -19,9 +19,10 @@
     <div class="nav-wrapper container">
       <a href="{% url 'home' %}" class="brand-logo"><i class="material-icons">cloud</i>Student Portal</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="{% url 'login' %}" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons left">person</i>Login</a></li>
+        <li><a href="{% url 'login' %}" data-target="slide-out" class="sidenav-trigger show-on-large"><i
+              class="material-icons left">person</i>Login</a></li>
       </ul>
-       
+
     </div>
   </nav>
   <br>
@@ -30,8 +31,21 @@
 
   <div class="row center-align">
     <div class="col s6 offset-s3">
-       
+
       <div class="card">
+        <br>
+        {% if messages %}
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+              <p>{{ message }}</p>
+            </div>
+            {% endfor %}
+          </div>
+
+        </div>
+        {% endif %}
 
         <form method="post" action="" role="form">
           {% csrf_token %}
@@ -70,6 +84,8 @@
                 Create
               </button>
             </p>
+
+
             <a href="{% url 'login' %}">If you have already an account then please LOGIN</a><br><br><br>
           </div>
 
@@ -88,47 +104,49 @@
   </div>
   </div>
   <br>
-<br>
-<br>
-<br>
-<br>
-<br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 
-<footer class="page-footer orange">
-  <div class="container">
-    <div class="row">
-      <div class="col l6 s12">
-        <h5 class="white-text">Company Bio</h5>
-        <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
-      </div>
-      <div class="col l3 s12">
-        <h5 class="white-text">Settings</h5>
-        <ul>
-          <li><a class="white-text" href="#!">Link 1</a></li>
-          <li><a class="white-text" href="#!">Link 2</a></li>
-          <li><a class="white-text" href="#!">Link 3</a></li>
-          <li><a class="white-text" href="#!">Link 4</a></li>
-        </ul>
-      </div>
-      <div class="col l3 s12">
-        <h5 class="white-text">Connect</h5>
-        <ul>
-          <li><a class="white-text" href="#!">Link 1</a></li>
-          <li><a class="white-text" href="#!">Link 2</a></li>
-          <li><a class="white-text" href="#!">Link 3</a></li>
-          <li><a class="white-text" href="#!">Link 4</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="footer-copyright">
+  <footer class="page-footer orange">
     <div class="container">
-    Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Anika</a>
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Company Bio</h5>
+          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our
+            full time job. Any amount would help support and continue development on this project and is greatly
+            appreciated.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-</footer>
+    <div class="footer-copyright">
+      <div class="container">
+        Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Anika</a>
+      </div>
+    </div>
+  </footer>
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="{% static 'js/materialize.js' %}"></script>

@@ -1,8 +1,8 @@
 from django.urls import path
-from authy.views import UserProfile, Signup, PasswordChange, PasswordChangeDone, EditProfile, activate,home
+from authy.views import UserProfile, Signup, PasswordChange, PasswordChangeDone, EditProfile, activate,home,register,teacherinfo
 
 from django.contrib.auth import views as auth_Views 
-#from . import views
+from . import views
 
 
 
@@ -10,7 +10,11 @@ urlpatterns = [
    	
     path('profile/edit', EditProfile, name='edit-profile'),
    	path('signup/', Signup, name='signup'),
-   	path('home/', home, name='home'),
+   	path('register/', register, name='register'),
+   	path('teacherinfo/', teacherinfo, name='teacherinfo'),
+	path('contact/', views.ContactView.as_view(), name="contact"),
+	path('search',views.Search.as_view(), name='search'),
+   	#path('home/', home, name='home'),
    	path('login/', auth_Views.LoginView.as_view(template_name='registration/login.html'), name='login'),
 	path('activate/<uidb64>/<token>',  activate , name='activate'),
    	path('logout/', auth_Views.LogoutView.as_view(), {'next_page' : 'index'}, name='logout'),
