@@ -2,80 +2,93 @@
 {% load static %}
 
 {% block content %}
-<div class="section">
-	<h4>{{ course.title }}</h4>
-	<div class="divider"></div>
-</div>
-
+<header id="bg">
+  <div class="section center">
+    <h4 style="color: rgba(255, 254, 215, 0.966);"><b>{{ course.title }}</b></h4><br><br>
+    <div class="divider" style="background-color: rgb(203, 241, 203);"></div>
+  </div>
+</header>
 <div class="row">
-
-<div class="col s3">
+  <div class="col s3">
+    <div style="margin-top: 6.5%; margin-left: 4%;">
       <ul class="collection with-header">
-        <li class="collection-header"><h4>Classroom</h4></li>
-        <a href="{% url 'course' course.id %}" class="collection-item">Home</a>
-        <a href="{% url 'modules' course.id %}" class="collection-item active">Module</a>
-        <a href="{% url 'submissions' course.id %}" class="collection-item">Submissions</a>
-        <a href="{% url 'questions' course.id %}" class="collection-item">Questions</a>
+        <li class="collection-header">
+          <h4 style="margin: 2%; color: darkslategrey;"><b>Classroom</b></h4>
+        </li>
+        <a href="{% url 'course' course.id %}" class="collection-item"><b>Home</b></a>
+        <a href="{% url 'modules' course.id %}" class="collection-item active"><b>Module</b></a>
+        <a href="{% url 'submissions' course.id %}" class="collection-item"><b>Submissions</b></a>
+        <a href="{% url 'questions' course.id %}" class="collection-item"><b>Questions</b></a>
+        
+        {% if teacher_mode == True %}
+        <li class="collection-header">
+          <h4 style="margin-left: 2%; color: darkslategrey;"><b>Teacher</b></h4>
+        </li>
+        <a href="{% url 'student-submissions' course.id %}" class="collection-item"><b>Student Submissions</b></a>
+        {% endif %}
       </ul>
-</div>
-
-<div class="col s9">
-
-  {% if teacher_mode == True %}
-    <a href="{% url 'new-module' course.id %}" class="btn-floating btn-large waves-effect waves-light red right"><i class="material-icons">add</i></a>
-  {% endif %}
-
-  <div class="section">
-    <h4>Modules</h4>
-    <div class="divider"></div> 
-
-    <ul class="collapsible">
-      {% for module in course.modules.all %}
-      <li>
-        <div class="collapsible-header"><i class="material-icons">expand_more</i><b>{{ module.title }}</b></div>
-        <div class="collapsible-body">
-          {% if teacher_mode == True %}
-            <a href="{% url 'new-page' course.id module.id %}" class="btn-small"><i class="material-icons">add</i>Add new page</a>
-            <a href="{% url 'new-quiz' course.id module.id %}" class="btn-small"><i class="material-icons">add</i>Add new quiz</a>
-            <a href="{% url 'new-assignment' course.id module.id %}" class="btn-small"><i class="material-icons">add</i>add new assignment</a>
-          {% endif %}
+    </div>
+  </div>
+  <div class="col s9">
+    {% if teacher_mode == True %}
+    <a href="{% url 'new-module' course.id %}" class="btn-floating btn-large waves-effect waves-light red right" style="margin-top: 3.3%; margin-right: 4%;"><i class="material-icons">add</i></a>
+    {% endif %}
+    <div class="section" style="padding: 1.6%; margin-right: 0.5%;">
+      <!-- <ul class="collection with-header">
+      <li class="collection-header"><h4>Modules</h4></li>
+      </ul> -->
+      <!-- <div class="divider"></div>  -->
+      <ul class="collapsible" >
+        <li class="collection-header"><h4 style="margin: 2%; color: darkslategrey;"><b>Modules</b></h4></li>
+        {% for module in course.modules.all %}
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">expand_more</i><b>{{ module.title }}</b>
+          </div>
+          <div class="collapsible-body">
+            {% if teacher_mode == True %}
+            <div class="container center"> 
+              <a href="{% url 'new-page' course.id module.id %}" class="btn-small"><i class="material-icons">add</i>Add new page</a>
+              <a href="{% url 'new-quiz' course.id module.id %}" class="btn-small"><i class="material-icons">add</i>Add new quiz</a>
+              <a href="{% url 'new-assignment' course.id module.id %}" class="btn-small"><i class="material-icons">add</i>add new assignment</a>
+            </div>
+            {% endif %}
             <div class="collection">
               <br>
               {% for page in module.pages.all %}
-                <a href="{% url 'page-detail' course.id module.id page.id %}" class="collection-item"><i class="material-icons">segment</i> {{ page.title }}
-                 <div class="secondary-content">
+              <a href="{% url 'page-detail' course.id module.id page.id %}" class="collection-item"><i class="material-icons">segment</i> {{ page.title }}
+                <div class="secondary-content">
                   Completed: 
                   <i class="material-icons secondary-content">{% if page.id in page_completions %}check_circle{% else %}panorama_fish_eye{% endif %}</i>                   
-                 </div>
-                </a>
+                </div>
+                <a href="{% url 'edit-page' course.id module.id page.id %}" class="btn" style="height: 50px;">Edit page</a>
+                <a href="{% url 'delete-page' course.id  module.id page.id %}" class="btn red" style="height: 50px;">Delete page</a>
+              </a>
               {% endfor %}
               {% for quiz in module.quizzes.all %}
-                <a href="{% url 'quiz-detail' course.id module.id quiz.id %}" class="collection-item"><i class="material-icons">fact_check</i> {{ quiz.title }}
-                 <div class="secondary-content">
+              <a href="{% url 'quiz-detail' course.id module.id quiz.id %}" class="collection-item"><i class="material-icons">fact_check</i> {{ quiz.title }}
+                <div class="secondary-content">
                   Completed: 
                   <i class="material-icons secondary-content">{% if quiz.id in quiz_completions %}check_circle{% else %}panorama_fish_eye{% endif %}</i>                   
-                 </div>
-                </a>
+                </div>
+              </a>
               {% endfor %}
               {% for assignment in module.assignments.all %}
-                <a href="{% url 'assignment-detail' course.id module.id assignment.id %}" class="collection-item"><i class="material-icons">fact_check</i> {{ assignment.title }}
-                 <div class="secondary-content">
+              <a href="{% url 'assignment-detail' course.id module.id assignment.id %}" class="collection-item"><i class="material-icons">fact_check</i> {{ assignment.title }}
+                <div class="secondary-content">
                   Completed: 
                   <i class="material-icons secondary-content">{% if assignment.id in assignment_completions %}check_circle{% else %}panorama_fish_eye{% endif %}</i>                   
-                 </div>
-                </a>
+                </div>
+                <a href="{% url 'edit-assignment' course.id module.id assignment.id %}" class="btn" style="height: 50px;">Edit assignment</a>
+                <a href="{% url 'delete-assignment' course.id  module.id assignment.id %}" class="btn red" style="height: 50px;">Delete assignment</a>
+              </a>
               {% endfor %}
             </div>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
-
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
-  
 </div>
-
-
-</div>
-
 {% endblock %}

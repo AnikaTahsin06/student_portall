@@ -2,23 +2,25 @@
 {% load static %}
 
 {% block content %}
-<div class="section">
-	<h4>My courses</h4>
-	<div class="divider"></div>
-</div>
-
+<header style="height: 130px; background-color: rgb(129, 195, 181);">
+  <div class="section">
+    <h4 class="center" style="color: cornsilk;">My courses</h4><br>
+    <div class="divider"></div>
+  </div>
+</header>
+<div style="margin: 2%;"> 
 <div class="row">
 {% for course in courses %}
-<div class="col s12 m4">
-  <div class="card">
+<div class="col s12 m3">
+  <div class="card" style="height: 315px;">
     <div class="card-image waves-effect waves-block waves-light">
       <a href="{% url 'course' course.id %}"><img class="activator" src="{{ course.picture.url }}"></a>
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4"><b>{{ course.title }}</b><i class="material-icons right">more_vert</i></span>
       <p class="title"><b>{{ course.enrolled.count }}</b> Students</p>
-      <a href="{% url 'edit-course' course.id %}" class="btn">Edit course</a>
-      <a href="{% url 'delete-course' course.id %}" class="btn red">Delete</a>
+      <a href="{% url 'edit-course' course.id %}" class="btn" style="height: 50px;">Edit course</a>
+      <a href="{% url 'delete-course' course.id %}" class="btn red" style="height: 50px;">Delete</a>
     </div>
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4">About<i class="material-icons right">close</i></span>
@@ -28,7 +30,12 @@
 </div>
 {% endfor %}
 </div>
-<a href="{% url 'newcourse'%}" class="btn">Create Course</a>
+<div class="center container">
+  <br>
+  <a href="{% url 'newcourse'%}" class="btn btn-large center" style="width: 70%;">Create Course</a><br><br>
+  <br><br>
+</div>
+</div>
  
 
 {% endblock %}

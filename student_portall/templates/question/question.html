@@ -3,10 +3,12 @@
 {% load humanize %}
 
 {% block content %}
-<div class="section">
-	<h4>{{ course.title }}</h4>
-	<div class="divider"></div>
-</div>
+<header id="bg">
+  <div class="section center">
+    <h4><b>{{ course.title }}</b></h4><br><br>
+    <div class="divider" style="background-color: rgb(203, 241, 203);"></div>
+  </div>
+</header>
 
 <div class="row">
 
@@ -55,7 +57,8 @@
       </div>
 
       <div class="col s10">
-        <p class="black-text"><b>{{ question.user.get_full_name }}</b> @{{ question.user.username }}</p>
+        <p class="black-text"><b>{{ question.user.get_full_name }}</b></p>
+        <p> @{{ question.user.username }}</p>
         <p class="black-text"><b>Asked: </b>{{question.created_date | naturaltime }}</p>
       </div>
       </div>
@@ -98,7 +101,8 @@
       </div>
 
       <div class="col s10">
-        <p class="black-text"><b>{{ answer.user.get_full_name }}</b> @{{ answer.user.username }}</p>
+        <p class="black-text"><b>{{ answer.user.get_full_name }}</b></p>
+        <p> @{{ answer.user.username }}</p>
         <p class="black-text"><b>Answered: </b>{{answer.created_date | naturaltime }}</p>
       </div>
 

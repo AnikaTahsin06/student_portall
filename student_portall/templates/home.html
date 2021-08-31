@@ -42,10 +42,10 @@
       <div class="col s12">
         <h5 id="searchh">Search Courses</h5>
         <div class="input-field" style="height: 20px;">
-           <form action="{% url 'search' %}" method="GET">
+          <form action="{% url 'search' %}" method="GET">
             <input type="text" name="keyword" placeholder="Search course name here.." required style="height: 25px;">
             <button>Search</button>
-           </form>
+          </form>
         </div>
       </div>
     </div>
@@ -54,7 +54,8 @@
 
 <section>
   <div class="container">
-    <h2 class="center" style="color: rgba(0, 41, 41, 0.657);">Categories</h2><hr>
+    <h2 class="center" style="color: rgba(0, 41, 41, 0.657);">Categories</h2>
+    <hr>
     <div class="row">
       {% for category in categories %}
       <div class="col s12 m4">
@@ -70,17 +71,17 @@
   </div>
 </section>
 <section>
-  <div class="container">
+   <div style="margin: 5%;">
     <div class="row">
       {% for course in course %}
-      <div class="col s12 m4">
-        <div class="card">
+      <div class="col s12 m3">
+        <div class="card"  style="height: 315px;">
           <div class="card-image waves-effect waves-block waves-light">
             <img class="activator" src="{{ course.picture.url }}">
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4"><b>{{ course.title }}</b><i
-              class="material-icons right">more_vert</i></span>
+                class="material-icons right">more_vert</i></span>
             <p class="title"><b>{{ course.enrolled.count }}</b> Students</p>
             <a href="{% url 'enroll' course.id %}" class="btn">Enroll</a>
           </div>
@@ -92,7 +93,7 @@
       </div>
       {% endfor %}
     </div>
-  </div>
+   </div>
 </section>
 
 <section class="section section-icons grey lighten-4 center">
@@ -101,9 +102,7 @@
       {% for teacher in teachers %}
       <div class="col s12 m4">
         <div class="card-panel">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="{{ profile.picture.url }}">
-          </div>
+           
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title" style="color:#18445dd5;">{{ teacher.user.username}}</h5>
@@ -140,7 +139,9 @@
             <i class="material-icons large">aspect_ratio</i>
             <h5>Web Development</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet impedit nostrum excepturi sequi incidunt error eaque aspernatur a id dolor nisi, dicta architecto nesciunt modi labore ipsam mollitia provident! Officia!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod amet  
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet impedit nostrum excepturi sequi incidunt
+              error eaque aspernatur a id dolor nisi, dicta architecto nesciunt modi labore ipsam mollitia provident!
+              Officia!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod amet
             </p>
           </div>
         </div>
@@ -151,7 +152,9 @@
             <i class="material-icons large">aspect_ratio</i>
             <h5>Web Development</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet impedit nostrum excepturi sequi incidunt error eaque aspernatur a id dolor nisi, dicta architecto nesciunt modi labore ipsam mollitia provident! Officia!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod amet  
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet impedit nostrum excepturi sequi incidunt
+              error eaque aspernatur a id dolor nisi, dicta architecto nesciunt modi labore ipsam mollitia provident!
+              Officia!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod amet
             </p>
           </div>
         </div>
@@ -162,7 +165,9 @@
             <i class="material-icons large">aspect_ratio</i>
             <h5>Web Development</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet impedit nostrum excepturi sequi incidunt error eaque aspernatur a id dolor nisi, dicta architecto nesciunt modi labore ipsam mollitia provident! Officia!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod amet  
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet impedit nostrum excepturi sequi incidunt
+              error eaque aspernatur a id dolor nisi, dicta architecto nesciunt modi labore ipsam mollitia provident!
+              Officia!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod amet
             </p>
           </div>
         </div>
@@ -175,7 +180,7 @@
     </div>
   </div>
 </div>
-<div style="background-color: rgba(195, 220, 240, 0.65);">
+<div style="background-color: rgba(92, 182, 140, 0.596);">
   <br><br>
   <h4 class="teal-text text-darken-3 center"><b>Questions and Answering Section</b></h4>
   <br><br>
@@ -184,26 +189,38 @@
       <div class="contentBx">
         <div class="label">List One</div>
         <div class="content">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem recusandae nemo deleniti praesentium! Fugiat aliquid consectetur repellat eos deleniti sapiente aperiam architecto itaque sequi alias asperiores, officia, earum ipsam minus? Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium nulla laboriosam reprehenderit provident deleniti fugiat facilis quas, tempore explicabo totam dicta. Rem minus fugiat maxime culpa commodi, veniam impedit incidunt! Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti a culpa nostrum labore ipsa quasi reprehenderit cupiditate non reiciendis doloremque facilis in explicabo dolor temporibus id, totam earum accusamus alias! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi incidunt alias odio, veniam dolor dolores repudiandae ipsa sequi nemo ducimus voluptatem earum dolore saepe maxime cupiditate doloremque laborum impedit aspernatur.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem recusandae nemo deleniti praesentium!
+            Fugiat aliquid consectetur repellat eos deleniti sapiente aperiam architecto itaque sequi alias asperiores,
+            officia, earum ipsam minus? Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium nulla
+            laboriosam reprehenderit provident deleniti fugiat facilis quas, tempore explicabo totam dicta. Rem minus
+            fugiat maxime culpa commodi, veniam impedit incidunt! Lorem ipsum dolor sit amet consectetur adipisicing
+            elit. Deleniti a culpa nostrum labore ipsa quasi reprehenderit cupiditate non reiciendis doloremque facilis
+            in explicabo dolor temporibus id, totam earum accusamus alias! Lorem, ipsum dolor sit amet consectetur
+            adipisicing elit. Eligendi incidunt alias odio, veniam dolor dolores repudiandae ipsa sequi nemo ducimus
+            voluptatem earum dolore saepe maxime cupiditate doloremque laborum impedit aspernatur.</p>
         </div>
       </div>
       <div class="contentBx">
         <div class="label">List One</div>
         <div class="content">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem recusandae nemo deleniti praesentium! Fugiat aliquid consectetur repellat eos deleniti sapiente aperiam architecto itaque sequi alias asperiores, officia, earum ipsam minus?</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem recusandae nemo deleniti praesentium!
+            Fugiat aliquid consectetur repellat eos deleniti sapiente aperiam architecto itaque sequi alias asperiores,
+            officia, earum ipsam minus?</p>
         </div>
       </div>
       <div class="contentBx">
         <div class="label">List One</div>
         <div class="content">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem recusandae nemo deleniti praesentium! Fugiat aliquid consectetur repellat eos deleniti sapiente aperiam architecto itaque sequi alias asperiores, officia, earum ipsam minus?</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem recusandae nemo deleniti praesentium!
+            Fugiat aliquid consectetur repellat eos deleniti sapiente aperiam architecto itaque sequi alias asperiores,
+            officia, earum ipsam minus?</p>
         </div>
       </div>
     </div>
   </div>
   <br><br>
 </div>
- 
+
 
 
 {% endblock %}

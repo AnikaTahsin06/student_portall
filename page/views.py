@@ -28,7 +28,7 @@ def NewPageModule(request, course_id, module_id):
 				title = form.cleaned_data.get('title')
 				content = form.cleaned_data.get('content')
 				files = request.FILES.getlist('files')
-				content2 = form.cleaned_data.get('content')
+				content2 = form.cleaned_data.get('content2')
 
 				for file in files:
 					file_instance = PostFileContent(file=file, user=user)
@@ -48,6 +48,58 @@ def NewPageModule(request, course_id, module_id):
 
 	return render(request, 'page/newpage.html', context)
 
+@login_required
+def EditPage(request, course_id, module_id, page_id):
+	user = request.user
+	course = get_object_or_404(Course, id=course_id)
+	module = get_object_or_404(Module, id=module_id)
+	page = get_object_or_404(Page, id=page_id)
+	files_objs = []
+
+	if user != course.user:
+		return HttpResponseForbidden()
+
+	else:
+		if request.method == 'POST':
+			form = NewPageForm(request.POST, request.FILES, instance=page)
+			if form.is_valid():
+				page.title = form.cleaned_data.get('title')
+				page.content = form.cleaned_data.get('content')
+				files = request.FILES.getlist('files')
+				page.content2 = form.cleaned_data.get('content2')
+				for file in files:
+					file_instance = PostFileContent(file=file, user=user)
+					file_instance.save()
+					files_objs.append(file_instance)
+				#p = Page.objects.create(title=page.title, content=page.content,content2=page.content2, user=user)
+				page.files.set(files_objs)
+				page.save()
+				#module.pages.add(p)
+				 
+				return redirect('modules', course_id=course_id)
+		else:
+			form = NewPageForm(instance=page)
+
+	context = {
+		'form': form,
+		'page': page
+	}
+
+	return render(request, 'page/editpage.html', context)
+
+@login_required
+def DeletePage(request, course_id, module_id, page_id):
+	user = request.user
+	course = get_object_or_404(Course, id=course_id)
+	module = get_object_or_404(Module, id=module_id)
+	page = get_object_or_404(Page, id=page_id)
+
+	if user != course.user:
+		return HttpResponseForbidden()
+	else:
+		page.delete()
+
+	return redirect('modules', course_id=course_id)
 
 def PageDetail(request, course_id, module_id, page_id):
 	page = get_object_or_404(Page, id=page_id)

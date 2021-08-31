@@ -3,29 +3,43 @@
 
 {% block content %}
 <section>
-    <div class="container">
-        <div class="row">
-            <h3>Search Results for <span class="text-info">"{{request.GET.keyword}}"</span></h3><hr>
-            {% for result in results %}
-            <div class="col s12 m4">
-                <div class="card">
-                  <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="{{ result.picture.url }}">
-                  </div>
-                  <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4"><b>{{ result.title }}</b><i
-                      class="material-icons right">more_vert</i></span>
-                    <p class="title"><b>{{ result.enrolled.count }}</b> Students</p>
-                    <a href="{% url 'enroll' result.id %}" class="btn">Enroll</a>
-                  </div>
-                  <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">About<i class="material-icons right">close</i></span>
-                    <p>{{ result.description }}</p>
-                  </div>
-                </div>
-              </div>
-            {% endfor %}
+  <div class="container">
+    <div class="row">
+      <h3>Search Results for <span class="text-info">"{{request.GET.keyword}}"</span></h3>
+      <hr>
+      {% if results %}
+      {% for result in results %}
+      <div class="col s12 m4">
+        <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="{{ result.picture.url }}">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4"><b>{{ result.title }}</b><i
+                class="material-icons right">more_vert</i></span>
+            <p class="title"><b>{{ result.enrolled.count }}</b> Students</p>
+            <a href="{% url 'enroll' result.id %}" class="btn">Enroll</a>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">About<i class="material-icons right">close</i></span>
+            <p>{{ result.description }}</p>
+          </div>
         </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      {% for result in results2 %}
+      <div class="col s12 m4">
+        <a href="{% url 'category-courses' result.slug %}">
+          <div class="card-panel teal center-align white-text">
+            <i class="material-icons large">{{ result.icon }}</i>
+            <h5><b>{{ result.title }}</b></h5>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+      {% endif %}
     </div>
+  </div>
 </section>
 {% endblock %}

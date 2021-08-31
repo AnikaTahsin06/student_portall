@@ -2,37 +2,38 @@
 {% load static %}
 
 {% block content %}
-<div class="section">
-	<h4>{{ course.title }}</h4>
-	<div class="divider"></div>
-</div>
-
+<header id="bg">
+  <div class="section center">
+    <h4 style="color: rgba(255, 254, 215, 0.966);"><b>{{ course.title }}</b></h4><br><br>
+    <div class="divider" style="background-color: rgb(203, 241, 203);"></div>
+  </div>
+</header>
 <div class="row">
-
-<div class="col s3">
+  <div class="col s3">
+    <div style="margin-top: 6.5%; margin-left: 4%;">
       <ul class="collection with-header">
-        <li class="collection-header"><h4>Classroom</h4></li>
-        <a href="{% url 'course' course.id %}" class="collection-item">Home</a>
-        <a href="{% url 'modules' course.id %}" class="collection-item">Module</a>
-        <a href="{% url 'submissions' course.id %}" class="collection-item">Submissions</a>
-        <a href="{% url 'questions' course.id %}" class="collection-item">Questions</a>
-
-        
-          <li class="collection-header"><h4>Teacher</h4></li>
-          <a href="{% url 'student-submissions' course.id %" class="collection-item active">Student Submissions</a>
-        
-
+        <li class="collection-header">
+          <h4 style="margin: 2%; color: darkslategrey;"><b>Classroom</b></h4>
+        </li>
+        <a href="{% url 'course' course.id %}" class="collection-item"><b>Home</b></a>
+        <a href="{% url 'modules' course.id %}" class="collection-item"><b>Module</b></a>
+        <a href="{% url 'submissions' course.id %}" class="collection-item"><b>Submissions</b></a>
+        <a href="{% url 'questions' course.id %}" class="collection-item"><b>Questions</b></a>
+        <li class="collection-header">
+          <h4 style="margin-left: 2%; color: darkslategrey;"><b>Teacher</b></h4>
+        </li>
+        <a href="{% url 'student-submissions' course.id %" class="collection-item  active"><b>Student Submissions</b></a>
       </ul>
-</div>
-
-<div class="col s9">
-
-  <div class="section">
-    <h4>Student submissions</h4>
-
-      <table>
-        <thead>
-          <tr>
+    </div>
+  </div>
+  <div class="col s9">
+    <div class="section" style="margin-top: 0.15%; margin-right: 2%; margin-left: 1%;">
+      <ul class="collapsible"  style=" background-color: rgb(187, 235, 187);">
+        <li class="collection-header"><h4 style="margin: 2%; color: darkslategrey;"><b>Student submissions</b></h4></li>
+        <div class="divider" style="background-color: rgb(142, 197, 142);"></div>
+        <table>
+          <thead>
+            <tr>
               <th>Student</th>
               <th>Username</th>
               <th>Assignment</th>
@@ -43,34 +44,27 @@
               <th>Out of</th>
               <th>Graded by</th>
               <th>Grade</th>
-          </tr>
-        </thead>
-
-        <tbody>
-        {% for grade in grades %}
-          <tr>
-            <td>{{ grade.submission.user.get_full_name }}</td>
-            <td>{{ grade.submission.user.username }}</td>
-            <td>{{ grade.submission.assignment.title }}</td>
-            <td>{{ grade.submission.assignment.due }}</td>
-            <td>{{ grade.submission.date }}</td>
-            <td><b>{{ grade.status }}</b></td>
-            <td>{{ grade.points }}</td>
-            <td>{{ grade.submission.assignment.points }}</td>
-            <td>{{ grade.graded_by.get_full_name }}</td>
-            <td><a href="{% url 'grade-submission' course.id grade.id %}"><i class="material-icons">mode</i>Grade</a></td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-
-
-
+            </tr>
+          </thead>
+          <tbody>
+            {% for grade in grades %}
+            <tr>
+              <td>{{ grade.submission.user.get_full_name }}</td>
+              <td>{{ grade.submission.user.username }}</td>
+              <td>{{ grade.submission.assignment.title }}</td>
+              <td>{{ grade.submission.assignment.due }}</td>
+              <td>{{ grade.submission.date }}</td>
+              <td><b>{{ grade.status }}</b></td>
+              <td>{{ grade.points }}</td>
+              <td>{{ grade.submission.assignment.points }}</td>
+              <td>{{ grade.graded_by.get_full_name }}</td>
+              <td><a href="{% url 'grade-submission' course.id grade.id %}"><i class="material-icons">mode</i>Grade</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </ul>
+    </div>
   </div>
-  
 </div>
-
-
-</div>
-
 {% endblock %}

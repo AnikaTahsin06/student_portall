@@ -2,9 +2,9 @@ from django.urls import path
 from classroom.views import Categories, CategoryCourses, NewCourse, Enroll, DeleteCourse, EditCourse, MyCourses, CourseDetail, Submissions, StudentSubmissions, GradeSubmission
 
 from module.views import NewModule, CourseModules
-from page.views import  NewPageModule, PageDetail, MarkPageAsDone
+from page.views import  NewPageModule, PageDetail, MarkPageAsDone, EditPage, DeletePage
 from quiz.views import NewQuiz, NewQuestion, QuizDetail, TakeQuiz, SubmitAttempt, AttemptDetail
-from assignment.views import NewAssignment, AssignmentDetail, NewSubmission
+from assignment.views import NewAssignment, AssignmentDetail, NewSubmission, EditAssignment, DeleteAssignment
 from question.views import NewStudentQuestion, Questions, QuestionDetail, MarkAsAnswer, VoteAnswer
 
 urlpatterns = [
@@ -25,7 +25,8 @@ urlpatterns = [
     #Pages
 	path('<course_id>/modules/<module_id>/pages/newpage', NewPageModule, name='new-page'),
 	path('<course_id>/modules/<module_id>/pages/<page_id>', PageDetail, name='page-detail'),
-	#path('<course_id>/modules/<module_id>/pages/<page_id>/delete', DeletePage, name='delete-page'),
+	path('<course_id>/modules/<module_id>/pages/<page_id>/edit', EditPage, name='edit-page'),
+	path('<course_id>/modules/<module_id>/pages/<page_id>/delete', DeletePage, name='delete-page'),
 	path('<course_id>/modules/<module_id>/pages/<page_id>/done', MarkPageAsDone, name='mark-page-as-done'),
     #Quizzes
 	path('<course_id>/modules/<module_id>/quiz/newquiz', NewQuiz, name='new-quiz'),
@@ -37,6 +38,8 @@ urlpatterns = [
     #Assignment
 	path('<course_id>/modules/<module_id>/assignment/newassignment', NewAssignment, name='new-assignment'),
 	path('<course_id>/modules/<module_id>/assignment/<assignment_id>', AssignmentDetail, name='assignment-detail'),
+	path('<course_id>/modules/<module_id>/assignment/<assignment_id>/edit', EditAssignment, name='edit-assignment'),
+	path('<course_id>/modules/<module_id>/assignment/<assignment_id>/delete', DeleteAssignment, name='delete-assignment'),
 	path('<course_id>/modules/<module_id>/assignment/<assignment_id>/start', NewSubmission, name='start-assignment'),
     #Submissions
 	path('<course_id>/submissions', Submissions, name='submissions'),

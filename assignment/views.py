@@ -46,6 +46,58 @@ def NewAssignment(request, course_id, module_id):
 	}
 	return render(request, 'assignment/newassignment.html', context)
 
+@login_required
+def EditAssignment(request, course_id, module_id, assignment_id):
+	user = request.user
+	course = get_object_or_404(Course, id=course_id)
+	module = get_object_or_404(Module, id=module_id)
+	assignment = get_object_or_404(Assignment, id=assignment_id)
+	files_objs = []
+
+	if user != course.user:
+		return HttpResponseForbidden()
+
+	else:
+		if request.method == 'POST':
+			form = NewAssignmentForm(request.POST, request.FILES, instance=assignment)
+			if form.is_valid():
+				assignment.title = form.cleaned_data.get('title')
+				assignment.content = form.cleaned_data.get('content')
+				files = request.FILES.getlist('files')
+				assignment.content2 = form.cleaned_data.get('content2')
+				for file in files:
+					file_instance = AssignmentFileContent(file=file, user=user)
+					file_instance.save()
+					files_objs.append(file_instance)
+				assignment.files.set(files_objs)
+				assignment.save()
+				 
+				 
+				return redirect('modules', course_id=course_id)
+		else:
+			form = NewAssignmentForm(instance=assignment)
+
+	context = {
+		'form': form,
+		'assignment': assignment
+	}
+
+	return render(request, 'assignment/editassignment.html', context)
+
+@login_required
+def DeleteAssignment(request, course_id, module_id, assignment_id):
+	user = request.user
+	course = get_object_or_404(Course, id=course_id)
+	module = get_object_or_404(Module, id=module_id)
+	assignment = get_object_or_404(Assignment, id=assignment_id)
+
+	if user != course.user:
+		return HttpResponseForbidden()
+	else:
+		assignment.delete()
+
+	return redirect('modules', course_id=course_id)
+
 
 def AssignmentDetail(request, course_id, module_id, assignment_id):
 	user = request.user

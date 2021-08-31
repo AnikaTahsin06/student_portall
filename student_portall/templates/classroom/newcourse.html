@@ -3,63 +3,57 @@
 
         
 {% block content %}
-
-<div class="row center-align">
-  <div class="col s12">
-
-
-    <form method="post" enctype="multipart/form-data" action="" role="form">
-    {% csrf_token %}
-    <h3 class="title is-3">Create a new course</h3>
-
-          <div class="file-field input-field">
-            <div class="btn">
-              <span>Picture</span>
-              {{ form.picture }}
-            </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
-            </div>
+<header style="height: 130px; background-color: rgb(129, 195, 181);">
+  <div class="section">
+    <h4 class="center" style="color: cornsilk;">Create a new course</h4><br>
+    <div class="divider"></div>
+  </div>
+</header>
+<div class="container">
+  <div class="row center-align">
+    <div class="col s12">
+      <form method="post" enctype="multipart/form-data" action="" role="form">
+        {% csrf_token %}
+        <h3>Fill up these fields</h3>
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>Picture</span>
+            {{ form.picture }}
           </div>
-
-          <div class="input-field col s12">
-            {{ form.title }}
-            <label for="title">Title</label>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
           </div>
-
-          <div class="input-field col s12">
-            {{ form.description }}
-            <label for="description">Description</label>
-          </div>
-
-          <div class="input-field col s12">
-            {{ form.category }}
-            <label for="location">Category</label>
-          </div>
-
-          <div class="input-field col s12">
-              {{ form.syllabus }}
-          </div>
-
-
-      <div class="row">
-        <div class="col s12">
-          <span style="color: red; font-weight: bold;">{{ form.errors }}</span>
         </div>
-      </div>
-
-
-      <div class="field">
-      <p class="control">
-        <button type="submit" value="login" class="btn waves-effect waves-light">
-          Create
-        </button>
-      </p>
+        <div class="input-field col s12">
+          {{ form.title }}
+          <label for="title">Title</label>
+        </div>
+        <div class="input-field col s12">
+          {{ form.description }}
+          <label for="description">Description</label>
+        </div>
+        <div class="input-field col s12">
+          {{ form.category }}
+          <label for="location">Category</label>
+        </div>
+        <div class="input-field col s12">
+          {{ form.syllabus }}
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <span style="color: red; font-weight: bold;">{{ form.errors }}</span>
+          </div>
+        </div>
+        <div class="field">
+          <p class="control">
+            <button type="submit" value="login" class="btn-large waves-effect waves-light" style="width: 70%;">
+              Create
+            </button>
+          </p>
+        </div>
+      </form>
     </div>
-
-    </form>
-
-</div>
+  </div>
 </div>
 
 {% endblock %}

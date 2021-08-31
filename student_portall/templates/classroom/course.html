@@ -2,50 +2,56 @@
 {% load static %}
 
 {% block content %}
-<div class="section">
-	<h4>{{ course.title }}</h4>
-	<div class="divider"></div>
-</div>
-
-<div class="row">
-
-<div class="col s3">
-      <ul class="collection with-header">
-        <li class="collection-header"><h4>Classroom</h4></li>
-        <a href="{% url 'course' course.id %" class="collection-item active">Home</a>
-        <a href="{% url 'modules' course.id %}" class="collection-item">Module</a>
-        <a href="{% url 'submissions' course.id %}" class="collection-item">Submissions</a>
-        <a href="{% url 'questions' course.id %}" class="collection-item">Questions</a>
-
-        {% if teacher_mode == True %}
-          <li class="collection-header"><h4>Teacher</h4></li>
-          <a href="{% url 'student-submissions' course.id %}" class="collection-item">Student Submissions</a>
-        {% endif %}
-
-      </ul>
-</div>
-
-<div class="col s9">
-
-  {% if teacher_mode == True %}
-    <a class="btn-floating btn-large waves-effect waves-light red right"><i class="material-icons">add</i></a>
-  {% endif %}
-
-  <div class="section">
-    <h4>Recent announcements</h4>
-    <div class="divider"></div> 
-
-    <div>
-      
-    </div>
-
-    {{ course.syllabus | safe }}
-
+<header id="bg">
+  <div class="section center">
+    <h4 style="color: rgba(255, 254, 215, 0.966);"><b>{{ course.title }}</b></h4><br><br>
+    <div class="divider" style="background-color: rgb(203, 241, 203);"></div>
   </div>
-  
-</div>
-
-
-</div>
-
+</header>
+<section>
+  <div>
+    <div class="row">
+      <div class="col s3">
+        <div style="margin-top: 6.5%; margin-left: 4%;">
+          <ul class="collection with-header">
+            <li class="collection-header">
+              <h4 style="margin: 2%; color: darkslategrey;"><b>Classroom</b></h4>
+            </li>
+            <a href="{% url 'course' course.id %" class="collection-item active"><b>Home</b></a>
+            <a href="{% url 'modules' course.id %}" class="collection-item"><b>Module</b></a>
+            <a href="{% url 'submissions' course.id %}" class="collection-item"><b>Submissions</b></a>
+            <a href="{% url 'questions' course.id %}" class="collection-item"><b>Questions</b></a>
+      
+            {% if teacher_mode == True %}
+            <li class="collection-header">
+              <h4 style="margin-left: 2%; color: darkslategrey;"><b>Teacher</b></h4>
+            </li>
+            <a href="{% url 'student-submissions' course.id %}" class="collection-item"><b>Student Submissions</b></a>
+            {% endif %}
+      
+          </ul>
+        </div>
+      </div>
+    
+      <div class="col s9">
+    
+        <!-- {% if teacher_mode == True %}
+        <a class="btn-floating btn-large waves-effect waves-light red right"><i class="material-icons">add</i></a>
+        {% endif %} -->
+        <br>
+        <div class="section" style="background-color: rgba(92, 182, 140, 0.596); padding: 4%; margin-right: 1%;">
+          <h4 class="center">Recent announcements</h4>
+          <div class="divider"></div>
+    
+           
+    
+          {{ course.syllabus | safe }}
+    
+        </div>
+    
+      </div>
+    </div>
+  </div>
+</section>
+ 
 {% endblock %}

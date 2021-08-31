@@ -46,10 +46,11 @@ class EmailThread(threading.Thread):
 
 # Create your views here.
 def home(request):
+	 
 	template = "home.html"
 	categories = Category.objects.all()
 	course = Course.objects.all()
-	teachers = Profile.objects.filter(user_type='teacher')
+	teachers = Profile.objects.filter(  user_type='teacher')
 	context = {
 		'categories': categories,
 		'course': course,
@@ -70,7 +71,9 @@ class Search(TemplateView):
         context = super().get_context_data(**kwargs)
         kw = self.request.GET.get("keyword")
         results = Course.objects.filter( Q(title__icontains=kw) )
+        results2 = Category.objects.filter( Q(title__icontains=kw) )
         context["results"] = results
+        context["results2"] = results2
         return context
 
 
@@ -143,7 +146,7 @@ def Signup(request):
             )
 			EmailThread(email_message).start()
 			messages.add_message(request, messages.SUCCESS,
-                            'account created succesfully')
+                            'Account created succesfully.Please verify your account before login!')
 			
 			
 
@@ -168,7 +171,7 @@ def activate(request,uidb64,token):
 	if user is not None and generate_token.check_token(user, token):
 		user.is_active = True
 		user.save()
-		messages.success(request, 'account activated successfully')
+		messages.success(request, 'Account activated successfully.Now you can login!')
 		return redirect('login')
 	else:
 		messages.warning(request, "activation link is invalid")
