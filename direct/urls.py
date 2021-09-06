@@ -1,5 +1,5 @@
 from django.urls import path
-from direct.views import inbox, PeopleWeCanMessage, NewConversation, Directs, SendDirect, LoadMore, UserSearch, Broadcast
+from direct.views import  inbox, PeopleWeCanMessage, NewConversation, Directs, SendDirect, LoadMore, UserSearch, Broadcast
 
 urlpatterns = [
     path('', inbox, name='inbox'),

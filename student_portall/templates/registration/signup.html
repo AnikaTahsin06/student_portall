@@ -7,13 +7,13 @@
 </div>
 <div class="row center-align">
   <div class="col s6 offset-s3">
-    <div class="card">
+    <div class="collapsible" style="background-color: rgb(173, 224, 194); padding: 4%; margin-top: 2%;">
       <br>
       {% if messages %}
       <div class="row">
         {% for message in messages %}
         <div class="col s12">
-          <span style="color: green; font-weight: bold;">{{ message }}</span>
+          <span style="color: green; font-weight: bold; background-color: cadetblue;">{{ message }}</span>
         </div>
         {% endfor %}
       </div>

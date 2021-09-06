@@ -50,11 +50,20 @@ def home(request):
 	template = "home.html"
 	categories = Category.objects.all()
 	course = Course.objects.all()
+	#teachers = Profile.objects.all()
 	teachers = Profile.objects.filter(  user_type='teacher')
 	context = {
 		'categories': categories,
 		'course': course,
 		'teachers': teachers,
+	}
+	return render(request, template, context)
+
+def about(request):
+	template = "about.html"
+	teachers = Profile.objects.filter(  user_type='teacher')
+	context = {
+		'teachers':teachers,
 	}
 	return render(request, template, context)
 

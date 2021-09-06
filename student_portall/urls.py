@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from authy.views import UserProfile,home
+from authy.views import UserProfile,home,about
 from classroom.views import index
 
 
@@ -30,5 +30,6 @@ urlpatterns = [
     path('<username>', UserProfile, name='profile'),
     path('', home, name='home'),
     path('dashboard/', index, name='index'),
+    path('abour/', about, name='about'),
      
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

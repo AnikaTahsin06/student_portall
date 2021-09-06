@@ -73,7 +73,7 @@ def inbox(request):
     messages = Message.get_messages(user=request.user)
 
     #Pagination
-    paginator_messages = Paginator(messages, 5)
+    paginator_messages = Paginator(messages, 9)
     page_number_messages = request.GET.get('messagespage')
     messages_data = paginator_messages.get_page(page_number_messages)
 
@@ -96,7 +96,7 @@ def Directs(request, username):
             message['unread'] = 0
     
     #Pagination for directs
-    paginator_directs = Paginator(directs, 5)
+    paginator_directs = Paginator(directs, 9)
     page_number_directs = request.GET.get('directspage')
     directs_data = paginator_directs.get_page(page_number_directs)
     

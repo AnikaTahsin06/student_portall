@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block banner %}
+
+<header id="about-bg">
+  <div class="section no-pad-bot" id="index-banner">
+    <div>
+      <br><br>
+      <h2 class="header orange-text center">About US</h2>
+      <h5 class="header col s12 light center">Learn without limits and build new skills with our courses.</h5>
+      <br>
+    </div>
+  </div>
+</header>
+
+{% endblock %}
+
+{% block content %}
+ <div class="containerteach">
+    {% for teacher in teachers %}
+     <div class="cardtch">
+         <div class="contenttch">
+            {% if teacher.user.profile.picture %}
+             <div class="imgboxtch">
+                 <img src="{{ teacher.user.profile.picture.url }}" alt="">
+             </div>
+             {% else %}
+             <div class="imgboxtch">
+                 <img src="{% static 'img/no_avatar.jpg' %}" alt="">
+             </div>
+             {% endif %}
+             <div class="contentboxtch">
+                 <h4>{{ teacher.user.first_name }} {{ teacher.user.last_name }}</h4>
+                 {% if teacher.user.profile.profile_info %}
+                 <h5>{{teacher.user.profile.profile_info}}</h5>
+                 {% else %}
+                 <h5>Software Engineer</h5>
+                 {% endif %}
+             </div>
+             <div class="scii">
+                <a href=""><img src="{% static 'img/facebook.png' %}" alt=""></a>
+                <a href=""><img src="{% static 'img/twitter.png' %}" alt=""></a>
+                <a href=""><img src="{% static 'img/linkedin.png' %}" alt=""></a>
+             </div>
+         </div>
+     </div>
+     {% endfor %}
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <section>
+    <div class="teachercontain">
+        {% for teacher in teachers %}
+        <div class="cardd">
+            <div class="content">
+                {% if teacher.user.profile.picture %}
+                <div class="imgBx"><img src="{{ teacher.user.profile.picture.url }}" alt=""></div>
+                {% else %}
+                <div class="imgBx"><img src="{% static 'img/no_avatar.jpg' %}" alt=""></div>
+                {% endif %}
+                <div class="contentBx">
+                    <h3>{{ teacher.user.first_name }} {{ teacher.user.last_name }}</h3>
+                    {% if teacher.user.profile.profile_info %}
+                    <span>{{teacher.user.profile.profile_info}}</span>
+                    {% else %}
+                    <span>Software Engineer</span>
+                    {% endif %}
+                    
+                </div>
+                <div class="container">
+                    <ul class="sci">
+                        <li><a href=""><img src="{% static 'img/facebook.png' %}" alt=""></a></li>
+                        <li><a href=""><img src="{% static 'img/twitter.png' %}" alt=""></a></li>
+                        <li><a href=""><img src="{% static 'img/linkedin.png' %}" alt=""></a></li>
+                    </ul>
+                </div>
+                 
+            </div>
+        </div>
+         
+        {% endfor %}
+    </div>
+</section> -->
+
+
+<!-- <section class="section section-icons  grey lighten-4 center">
+    <div class="container">
+      <div class="row">
+        {% for teacher in teachers %}
+        <div class="col s12 m3">
+          <div class="card-panel" style="background-color: transparent;">
+             
+            {% if teacher.user.profile.picture %}
+            <img src="{{ teacher.user.profile.picture.url }}" class=" circle responsive-img">
+            {% else %}
+            <img src="{% static 'img/no_avatar.jpg' %}" class="circle responsive-img">
+            {% endif %}
+             
+            
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title" style="color:#18445dd5;">{{ teacher.user.username}}</h5>
+                <p class="card-title">{{ teacher.user.first_name }} {{ teacher.user.last_name }}</p>
+                <p class="card-text">{{teacher.user.email}}</p>
+                <p class="card-text"><small class="text-muted">{{teacher.user.profile_info}}</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section> -->
+{% endblock %}

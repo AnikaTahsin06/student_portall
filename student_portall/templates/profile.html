@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div class="col-md-4">
+    <div class="container">
+        {% if  profile.user.profile.banner %}
+          <img src="{{  profile.user.profile.banner.url }}">
+          {% else %}
+          <img src="{% static 'img/no_avatar.jpg' %}">
+          {% endif %}
+    </div>
     <h3>Detail Information</h3><li><a href="{% url 'edit-profile' %}"><i class="material-icons">menu_book</i>Edit Profile</a></li><hr>
     <p><span class="font-weight-bold">Name: </span> {{ nav_profile.user.first_name }} {{ nav_profile.user.last_name }}</p>
     <p><span class="font-weight-bold">Username: </span> {{user.username}}</p>

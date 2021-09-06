@@ -3,16 +3,16 @@
 
         
 {% block content %}
-<header style="height: 130px; background-color: rgb(129, 195, 181);">
+<header style="height: 130px; background-color: rgb(129, 195, 168);">
   <div class="section">
     <h4 class="center" style="color: cornsilk;">Create a new course</h4><br>
     <div class="divider"></div>
   </div>
 </header>
-<div class="container">
+<div class="collapsible" style="margin-top: 4%; margin-right: 6%; margin-left: 6%; margin-bottom: 4%; background-color: rgb(187, 235, 187);">
   <div class="row center-align">
     <div class="col s12">
-      <form method="post" enctype="multipart/form-data" action="" role="form">
+      <form method="post" enctype="multipart/form-data" action="" role="form" style="padding: 5%;">
         {% csrf_token %}
         <h3>Fill up these fields</h3>
         <div class="file-field input-field">
@@ -45,6 +45,7 @@
           </div>
         </div>
         <div class="field">
+          <br>
           <p class="control">
             <button type="submit" value="login" class="btn-large waves-effect waves-light" style="width: 70%;">
               Create

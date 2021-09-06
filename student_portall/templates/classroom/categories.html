@@ -3,34 +3,40 @@
 
 {% block banner %}
 
-<div class="section no-pad-bot" id="index-banner">
-	<div class="container">
-		<br><br>
-		<h2 class="header orange-text center">Learning</h2>
-		<h5 class="header col s12 light center"> Earn your certificate, learn a new skill or degree here.</h5>
-	</div>
-</div>
+<header id="cate-bg">
+  <div class="section no-pad-bot" id="index-banner">
+    <div>
+      <br><br>
+      <h2 class="header orange-text center">Learning</h2>
+      <h5 class="header col s12 light center">Learn without limits and build new skills with our courses.</h5>
+      <br>
+       
+    </div>
+  </div>
+   
+</header>
 
 {% endblock %}
 
 
 {% block content %}
-<div class="section">
-	<h4>Categories</h4>
-	<div class="divider"></div>
-</div>
-
-<div class="row">
-{% for category in categories %}
-    <div class="col s12 m4">
-      <a href="{% url 'category-courses' category.slug %}">
-      <div class="card-panel teal center-align white-text">
-        <i class="material-icons large">{{ category.icon }}</i>
-        <h5><b>{{ category.title }}</b></h5>
-      </div>
-      </a>
+<div class="divider" style="margin-top: -1%;"></div>
+<div style="margin: 4%;">
+  <div class="row">
+    <h4 class="center" style="color: rgb(20, 90, 77);"><b>Categories</b></h4><br>
+    <div class="divider" style="margin-left: 1%; margin-right: 1%; background-color: rgb(142, 197, 142);"></div>
+    <div class="divider" style="margin-left: 1%; margin-right: 1%; background-color: rgb(142, 197, 142);"></div>
+    {% for category in categories %}
+        <div class="col s12 m3" style="height: 260px;">
+          <a href="{% url 'category-courses' category.slug %}">
+            <div class="card-panel teal center-align white-text" style="height: 215px;">
+              <i class="material-icons large">{{ category.icon }}</i>
+              <h5><b>{{ category.title }}</b></h5>
+            </div>
+          </a> 
+        </div>
+    {% endfor %}
     </div>
-{% endfor %}
 </div>
 
 {% endblock %}

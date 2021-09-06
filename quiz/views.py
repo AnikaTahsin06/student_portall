@@ -1,3 +1,4 @@
+from classroom.models import Course
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
@@ -31,6 +32,50 @@ def NewQuiz(request, course_id, module_id):
 		'form': form,
 	}
 	return render(request, 'quiz/newquiz.html', context)
+
+@login_required
+def EditQuiz(request, course_id, module_id, quiz_id):
+	user = request.user
+	course = get_object_or_404(Course, id=course_id)
+	module = get_object_or_404(Module, id=module_id)
+	quiz = get_object_or_404(Quizzes, id=quiz_id)
+
+	if request.method == 'POST':
+		form = NewQuizForm(request.POST)
+		if form.is_valid():
+			quiz.title = form.cleaned_data.get('title')
+			quiz.description = form.cleaned_data.get('description')
+			quiz.due = form.cleaned_data.get('due')
+			quiz.allowed_attempts = form.cleaned_data.get('allowed_attempts')
+			quiz.time_limit_mins = form.cleaned_data.get('time_limit_mins')
+			#quiz.save()
+			Quizzes.objects.create(user=user, title=quiz.title, description=quiz.description, due=quiz.due, allowed_attempts=quiz.allowed_attempts, time_limit_mins=quiz.time_limit_mins )
+			quiz.save()
+			# quiz.module.quizzes.add()
+			# quiz.module.save()
+			return redirect('new-question', course_id=course_id, module_id=module_id, quiz_id=quiz.id)
+	else:
+		form = NewQuizForm()
+
+	context = {
+		'form': form,
+		'quiz':quiz
+	}
+	return render(request, 'quiz/editquiz.html', context)
+
+@login_required
+def DeleteQuiz(request, course_id, module_id, quiz_id):
+	user = request.user
+	course = get_object_or_404(Course, id=course_id)
+	module = get_object_or_404(Module, id=module_id)
+	quiz = get_object_or_404(Quizzes, id=quiz_id)
+
+	if user != course.user:
+		return HttpResponseForbidden()
+	else:
+		quiz.delete()
+
+	return redirect('modules', course_id=course_id)
 
 
 def NewQuestion(request, course_id, module_id, quiz_id):

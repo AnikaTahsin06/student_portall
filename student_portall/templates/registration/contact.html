@@ -3,23 +3,24 @@
 
 {% block content %}
 {% load crispy_forms_tags %}
-<div class="container">
+<div class="container" style="margin-top: 5%; margin-bottom: 5%;" >
     <div class="row">
         <div class="col s12 m6">
-            <div class="card-panel center">
-                <div class="medium material-icons">email</div>
-                <h1>Contact Us</h1>
-                <p>Do let our team know what you feel about this web template. This is our attempt
+            <div class="card-panel center contactt">
+                <i class="material-icons large" style="margin-top: 8%; color: rgba(14, 63, 47, 0.931);">email</i>
+                <h2><b>Contact Us</b></h2>
+                <p style="color: aliceblue;">Do let our team know what you feel about this web template. This is our attempt
                     to develop a compelte website using django and python. Your feedback or comments will be valuable to the team.</p>
             </div>
         </div>
         <div class="col s12 m6">
-            <div class="card-panel">
+            <div class="card-panel continfo">
                 <form method="POST">
                     <div class="form-group">
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <br>
+                        <button class="btn" type="submit" style="background-color: rgb(45, 121, 85);">Submit</button>
                     </div>
                 </form>
             </div>

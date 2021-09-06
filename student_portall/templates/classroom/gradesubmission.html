@@ -4,70 +4,69 @@
 {% block content %}
 <header id="bg">
   <div class="section center">
-    <h4 style="color: rgba(248, 228, 202, 0.966);"><b>{{ course.title }}</b></h4><br><br>
+    <h4 style="color: rgba(255, 254, 215, 0.966);"><b>{{ course.title }}</b></h4><br><br>
     <div class="divider" style="background-color: rgb(203, 241, 203);"></div>
   </div>
 </header>
-
 <div class="row">
-
-<div class="col s3">
+  <div class="col s3">
+    <div style="margin-top: 6.5%; margin-left: 4%;">
       <ul class="collection with-header">
-        <li class="collection-header"><h4>Classroom</h4></li>
-        <a href="{% url 'course' course.id %" class="collection-item">Home</a>
-        <a href="{% url 'modules' course.id %}" class="collection-item">Module</a>
-        <a href="{% url 'submissions' course.id %}" class="collection-item">Submissions</a>
-        <a href="{% url 'questions' course.id %}" class="collection-item">Questions</a>
-
-        {% if teacher_mode == True %}
-          <li class="collection-header"><h4>Teacher</h4></li>
-          <a href="{% url 'student-submissions' course.id %" class="collection-item active">Student Submissions</a>
+        <li class="collection-header">
+          <h4 style="margin: 2%; color: darkslategrey;"><b>Classroom</b></h4>
+        </li>
+        <a href="{% url 'course' course.id %" class="collection-item"><b>Home</b></a>
+        <a href="{% url 'modules' course.id %}" class="collection-item"><b>Module</b></a>
+        <a href="{% url 'submissions' course.id %}" class="collection-item"><b>Submissions</b></a>
+        <a href="{% url 'questions' course.id %}" class="collection-item"><b>Questions</b></a>
+         
+        {% if user.profile.user_type == 'teacher' %}
+        <li class="collection-header">
+          <h4 style="margin-left: 2%; color: darkslategrey;"><b>Teacher</b></h4>
+        </li>
+        <a href="{% url 'student-submissions' course.id %}" class="collection-item"><b>Student Submissions</b></a>
         {% endif %}
-
+         
       </ul>
-</div>
-
-<div class="col s9">
-
-  <div class="section">
-    <h4><b>{{ grade.submission.user.get_full_name }}</b></h4>
-    <h5>@{{ grade.submission.user.username }}</h5>
-
-    <div class="col s12 center-align">
-      <div class="card-panel">
-        <h4 class="card-title">{{ grade.submission.comment }}</h4>
-        <a href="{{ grade.submission.file.url }}" download>
-        <i class="material-icons">download</i>{{ grade.submission.get_file_name }} - Download</a>      
-      </div>
     </div>
-
-  <div class="col s12">
-  <form method="post" action="{% url 'grade-submission' course.id grade.id %}" role="form" class="col s12">
-    {% csrf_token %}
-    <h4>Assignment maximum points: <b>{{ grade.submission.assignment.points }}</b></h4>
-
-    <div class="input-field col s12">
-      <i class="material-icons prefix">plus_one</i>
-      <input id="icon_prefix" type="text" name="points" class="validate">
-      <label for="icon_prefix">Points</label>
-    </div>
-
-    <div class="col s12">
-        <button type="submit" value="login" class="btn waves-effect waves-light">
-          Submit
-        </button>
-    </div>
-  </form>
-</div>
-
-
-
-
   </div>
-  
+  <div class="col s9 collapsible" style="margin-top: 1.54%; margin-right: 0%; margin-left: 1.5%; width: 71%;">
+    <div class="section" style="margin-top: 2.15%; margin-right: 4%; margin-left: 3%;">
+      <h5 style="margin: 2%; color: darkslategrey;"><b>{{ grade.submission.user.get_full_name }}</b></h5>     
+      <h6 style="margin: 2%; color: darkslategrey;">Username: @{{ grade.submission.user.username }}</h6> 
+      <div class="divider" style="background-color: rgb(142, 197, 142); margin-left: 1.3%; margin-right: 1.3%;"></div>
+      <div class="divider" style="background-color: rgb(142, 197, 142); margin-left: 1.3%; margin-right: 1.3%;"></div>  
+      <div class="col s12 center-align">
+        <div class="card-panel">
+          <h4 class="card-title" style="color: darkslategray;"><b>{{ grade.submission.comment }}</b></h4>
+          <a href="{{ grade.submission.file.url }}" style="color: rgb(18, 161, 161);" download>
+            <i class="material-icons">
+              <b>download</b>
+            </i>
+            <b>{{ grade.submission.get_file_name }} - Download</b>
+          </a>      
+        </div>
+      </div>  
+      <div class="col s12">
+        <form method="post" action="{% url 'grade-submission' course.id grade.id %}" role="form" class="col s12">
+          {% csrf_token %}
+          <h5 style="color: darkslategrey;">Assignment maximum points: <b>{{ grade.submission.assignment.points }}</b></h5>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">
+              plus_one
+            </i>
+            <input id="icon_prefix" type="text" name="points" class="validate">
+            <label for="icon_prefix">Points</label>
+          </div>
+          <div class="col s12">
+            <button type="submit" value="login" class="btn waves-effect waves-light">
+              Submit
+            </button>
+            <br><br><br>
+          </div>
+        </form>
+      </div>   
+    </div>
+  </div>
 </div>
-
-
-</div>
-
 {% endblock %}

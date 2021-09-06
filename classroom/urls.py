@@ -3,7 +3,7 @@ from classroom.views import Categories, CategoryCourses, NewCourse, Enroll, Dele
 
 from module.views import NewModule, CourseModules
 from page.views import  NewPageModule, PageDetail, MarkPageAsDone, EditPage, DeletePage
-from quiz.views import NewQuiz, NewQuestion, QuizDetail, TakeQuiz, SubmitAttempt, AttemptDetail
+from quiz.views import NewQuiz, NewQuestion, QuizDetail, TakeQuiz, SubmitAttempt, AttemptDetail,DeleteQuiz,EditQuiz
 from assignment.views import NewAssignment, AssignmentDetail, NewSubmission, EditAssignment, DeleteAssignment
 from question.views import NewStudentQuestion, Questions, QuestionDetail, MarkAsAnswer, VoteAnswer
 
@@ -32,6 +32,8 @@ urlpatterns = [
 	path('<course_id>/modules/<module_id>/quiz/newquiz', NewQuiz, name='new-quiz'),
 	path('<course_id>/modules/<module_id>/quiz/<quiz_id>/newquestion', NewQuestion, name='new-question'),
 	path('<course_id>/modules/<module_id>/quiz/<quiz_id>/', QuizDetail, name='quiz-detail'),
+	path('<course_id>/modules/<module_id>/quiz/<quiz_id>/edit', EditQuiz, name='edit-quiz'),
+	path('<course_id>/modules/<module_id>/quiz/<quiz_id>/delete', DeleteQuiz, name='delete-quiz'),
 	path('<course_id>/modules/<module_id>/quiz/<quiz_id>/take', TakeQuiz, name='take-quiz'),
 	path('<course_id>/modules/<module_id>/quiz/<quiz_id>/take/submit', SubmitAttempt, name='submit-quiz'),
 	path('<course_id>/modules/<module_id>/quiz/<quiz_id>/<attempt_id>/results', AttemptDetail, name='attempt-detail'),

@@ -6,6 +6,7 @@
     $('.collapsible').collapsible();
     $('.datepicker').datepicker({format:'yyyy-mm-dd'});
 	$('.tabs').tabs();
+	 
 
     //for the answer vote
     $(".vote").click(function(){
@@ -58,3 +59,12 @@ for(i=0; i<accordion.length; i++){
 		this.classList.toggle('active')
 	})
 }
+
+// function togglePopup(){
+// 	document.getElementById("popup-1").classList.toggle("active");
+// }
+
+$(document).ready(function(){
+	$('.modal').modal();
+});
+

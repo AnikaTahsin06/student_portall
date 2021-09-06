@@ -43,7 +43,7 @@
         {% for module in course.modules.all %}
         <li>
           <div class="collapsible-header">
-            <i class="material-icons">expand_more</i><b>{{ module.title }}</b>
+            <i class="material-icons">expand_more</i><b>{{ module.title }}</b> 
           </div>
           <div class="collapsible-body">
             {% if teacher_mode == True %}
@@ -56,31 +56,56 @@
             <div class="collection">
               <br>
               {% for page in module.pages.all %}
-              <a href="{% url 'page-detail' course.id module.id page.id %}" class="collection-item"><i class="material-icons">segment</i> {{ page.title }}
+              {% if user.profile.user_type == 'teacher' %}
                 <div class="secondary-content">
-                  Completed: 
+                  <a href="{% url 'delete-page' course.id  module.id page.id %}"><i class="material-icons secondary-content red-text">delete</i></a>
+                  <a href="{% url 'edit-page' course.id module.id page.id %}"><i class="material-icons secondary-content green-text">mode</i></a>
+                </div>
+              {% endif %}
+              <a href="{% url 'page-detail' course.id module.id page.id %}" class="collection-item"><i class="material-icons">segment</i> {{ page.title }}
+                {% if user.profile.user_type == 'student' %}
+                <div class="secondary-content">
+                  Completed:
                   <i class="material-icons secondary-content">{% if page.id in page_completions %}check_circle{% else %}panorama_fish_eye{% endif %}</i>                   
                 </div>
-                <a href="{% url 'edit-page' course.id module.id page.id %}" class="btn" style="height: 50px;">Edit page</a>
-                <a href="{% url 'delete-page' course.id  module.id page.id %}" class="btn red" style="height: 50px;">Delete page</a>
+                {% endif %}
+                 
+                <!-- <a href="{% url 'edit-page' course.id module.id page.id %}" class="btn" style="height: 50px;">Edit page</a>
+                <a href="{% url 'delete-page' course.id  module.id page.id %}" class="btn red" style="height: 50px;">Delete page</a> -->
               </a>
               {% endfor %}
               {% for quiz in module.quizzes.all %}
+              {% if user.profile.user_type == 'teacher' %}
+                <div class="secondary-content">
+                  <a href="{% url 'delete-quiz' course.id  module.id quiz.id %}"><i class="material-icons secondary-content red-text">delete</i></a>
+                  <a href="{% url 'edit-quiz' course.id  module.id quiz.id %}"><i class="material-icons secondary-content green-text">mode</i></a>
+                </div>
+              {% endif %}
               <a href="{% url 'quiz-detail' course.id module.id quiz.id %}" class="collection-item"><i class="material-icons">fact_check</i> {{ quiz.title }}
+                {% if user.profile.user_type == 'student' %}
                 <div class="secondary-content">
                   Completed: 
                   <i class="material-icons secondary-content">{% if quiz.id in quiz_completions %}check_circle{% else %}panorama_fish_eye{% endif %}</i>                   
                 </div>
+                {% endif %}
               </a>
               {% endfor %}
               {% for assignment in module.assignments.all %}
+              {% if user.profile.user_type == 'teacher' %}
+                <div class="secondary-content">
+                  <a href="{% url 'delete-assignment' course.id  module.id assignment.id %}"><i class="material-icons secondary-content red-text">delete</i></a>
+                  <a href="{% url 'edit-assignment' course.id module.id assignment.id %}"><i class="material-icons secondary-content green-text">mode</i></a>
+                </div>
+              {% endif %}
               <a href="{% url 'assignment-detail' course.id module.id assignment.id %}" class="collection-item"><i class="material-icons">fact_check</i> {{ assignment.title }}
+                {% if user.profile.user_type == 'student' %}
                 <div class="secondary-content">
                   Completed: 
                   <i class="material-icons secondary-content">{% if assignment.id in assignment_completions %}check_circle{% else %}panorama_fish_eye{% endif %}</i>                   
                 </div>
-                <a href="{% url 'edit-assignment' course.id module.id assignment.id %}" class="btn" style="height: 50px;">Edit assignment</a>
-                <a href="{% url 'delete-assignment' course.id  module.id assignment.id %}" class="btn red" style="height: 50px;">Delete assignment</a>
+                {% endif %}
+                <!-- <a href="{% url 'edit-assignment' course.id module.id assignment.id %}" class="btn" style="height: 50px;">Edit assignment</a>
+                <a href="{% url 'delete-assignment' course.id  module.id assignment.id %}" class="btn red" style="height: 50px;">Delete assignment</a> -->
               </a>
               {% endfor %}
             </div>

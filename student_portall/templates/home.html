@@ -96,13 +96,20 @@
    </div>
 </section>
 
-<section class="section section-icons grey lighten-4 center">
+<section class="section section-icons  grey lighten-4 center">
   <div class="container">
     <div class="row">
       {% for teacher in teachers %}
-      <div class="col s12 m4">
-        <div class="card-panel">
+      <div class="col s12 m3">
+        <div class="card-panel" style="background-color: transparent;">
            
+          {% if teacher.user.profile.picture %}
+          <img src="{{ teacher.user.profile.picture.url }}" class=" circle responsive-img">
+          {% else %}
+          <img src="{% static 'img/no_avatar.jpg' %}" class="circle responsive-img">
+          {% endif %}
+           
+          
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title" style="color:#18445dd5;">{{ teacher.user.username}}</h5>
@@ -119,11 +126,11 @@
 </section>
 
 
-<!-- services section -->
+<!-- services section  style="background-color: rgb(218, 246, 218);"-->
 <br><br>
-<div class="container services" id="services">
+<div class="container  services" id="services" >
   <div class="col s12 16 offset-12 center">
-    <ul class="tabs">
+    <ul class="tabs" style="background-color: rgb(218, 246, 218);">
       <li class="tab col s6">
         <a href="#section1" class="indigo-text text-darken-4"><b>Which services we provide</b></a>
       </li>
@@ -187,7 +194,7 @@
   <div class="container">
     <div class="accordion">
       <div class="contentBx">
-        <div class="label">List One</div>
+        <div class="label"><b>List One</b></div>
         <div class="content">
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem recusandae nemo deleniti praesentium!
             Fugiat aliquid consectetur repellat eos deleniti sapiente aperiam architecto itaque sequi alias asperiores,
@@ -201,7 +208,7 @@
         </div>
       </div>
       <div class="contentBx">
-        <div class="label">List One</div>
+        <div class="label"><b>List One</b></div>
         <div class="content">
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem recusandae nemo deleniti praesentium!
             Fugiat aliquid consectetur repellat eos deleniti sapiente aperiam architecto itaque sequi alias asperiores,
@@ -209,7 +216,7 @@
         </div>
       </div>
       <div class="contentBx">
-        <div class="label">List One</div>
+        <div class="label"><b>List One</b></div>
         <div class="content">
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem recusandae nemo deleniti praesentium!
             Fugiat aliquid consectetur repellat eos deleniti sapiente aperiam architecto itaque sequi alias asperiores,
@@ -218,7 +225,7 @@
       </div>
     </div>
   </div>
-  <br><br>
+  <br><br><br><br>
 </div>
 
 
