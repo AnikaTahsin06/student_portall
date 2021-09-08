@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from authy.models import Profile
+from authy.models import Profile, teacherprofile
 
 def ForbiddenUsers(value):
 	forbidden_users = ['admin', 'css', 'js', 'authenticate', 'login', 'logout', 'administrator', 'root',
@@ -90,7 +90,8 @@ class TeacherUserform(UserCreationForm):
             raise forms.ValidationError("A user with that email already exists.")
         return email
 
-class TeacherProfileInfoForm(forms.ModelForm):
+class UserProfileInfoForm(forms.ModelForm):
+	bio = forms.CharField(required=False)
 	topic = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
 	mobile = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
 	url = forms.URLField(widget=forms.TextInput(), max_length=60, required=False)
@@ -113,16 +114,50 @@ class TeacherProfileInfoForm(forms.ModelForm):
 		(last, 'More than 2 years of experience'),
 	]
 	experienc = forms.ChoiceField(required=True, choices=experience)
-
-
 	teacher = 'teacher'
 	user_types = [
+         
         (teacher, 'teacher'),
     ]
 	user_type = forms.ChoiceField(required=True, choices=user_types)
 	class Meta():
-		model = Profile
-		fields = ('topic', 'mobile', 'url', 'url1', 'plans', 'experienc', 'user_type')
+		model = teacherprofile
+		fields = ('bio', 'profile_pic', 'topic', 'mobile', 'url', 'url1', 'plans', 'experienc', 'user_type')
+
+
+# class TeacherProfileInfoForm(forms.ModelForm):
+# 	topic = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
+# 	mobile = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
+# 	url = forms.URLField(widget=forms.TextInput(), max_length=60, required=False)
+# 	url1 = forms.URLField(widget=forms.TextInput(), max_length=60, required=False)
+# 	plans = forms.CharField(widget=forms.TextInput(), max_length=260, required=False)
+
+# 	Nonee = 'None'
+# 	month1 = '6 Months'
+# 	month2 = '12 Months'
+# 	month3 = '18 Months'
+# 	month4 = '24 Months'
+# 	last = 'More than 2 years of experience'
+
+# 	experience = [
+# 		(Nonee, 'None'),
+# 		(month1, '6 Months'),
+# 		(month2, '12 Months'),
+# 		(month3, '18 Months'),
+# 		(month4, '24 Months'),
+# 		(last, 'More than 2 years of experience'),
+# 	]
+# 	experienc = forms.ChoiceField(required=True, choices=experience)
+
+
+# 	teacher = 'teacher'
+# 	user_types = [
+#         (teacher, 'teacher'),
+#     ]
+# 	user_type = forms.ChoiceField(required=True, choices=user_types)
+# 	class Meta():
+# 		model = Profile
+# 		fields = ('topic', 'mobile', 'url', 'url1', 'plans', 'experienc', 'user_type')
 
 class EditProfileForm(forms.ModelForm):
 	first_name = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)

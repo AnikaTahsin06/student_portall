@@ -2,10 +2,35 @@
 {% load static %}
 
 {% block content %}
-<section>
+<header id="home-bg">
+  <div class="section no-pad-bot" id="index-banner">
+    <div>
+      <br><br>
+      <h2 class="header orange-text center">Learning</h2>
+      <h5 class="header col s12 light center">Learn without limits and build new skills with our courses.</h5>
+      <br>
+    </div>
+  </div>
+</header>
+<section id="search" class="section section-search #00695c teal darken-3 white-text center scrollspy">
   <div class="container">
     <div class="row">
-      <h3>Search Results for <span class="text-info">"{{request.GET.keyword}}"</span></h3>
+      <div class="col s12">
+        <h5 id="searchh">Search Courses</h5>
+        <div class="input-field" style="height: 20px;">
+          <form action="{% url 'search' %}" method="GET">
+            <input type="text" name="keyword" placeholder=" Search course name here.." required style="height: 25px;">
+             <button style="height: 43.8px; width: 65px; color: rgba(11, 82, 64, 0.945);"><b>Search</b></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div style="margin: 5%;">
+    <div class="row">
+      <h4 class="center" style="color: rgba(2, 31, 31, 0.657);">Search Results for <span class="text-info" style="color: darkslategrey;"><b>{{request.GET.keyword}}</b></span></h4>
       <hr>
       {% if results %}
       {% for result in results %}

@@ -50,7 +50,7 @@ class Profile(models.Model):
 	month4 = '24 Months'
 	last = 'More than 2 years of experience'
 
-	experience = [
+	experiences = [
 		(Nonee, 'None'),
 		(month1, '6 Months'),
 		(month2, '12 Months'),
@@ -58,6 +58,7 @@ class Profile(models.Model):
 		(month4, '24 Months'),
 		(last, 'More than 2 years of experience'),
 	]
+	user_type = models.CharField(max_length=50, choices=experiences, default=None)
 
 
 	teacher = 'teacher'
@@ -78,6 +79,22 @@ class Profile(models.Model):
 			pic.save(self.picture.path)
 
 
+	def __str__(self):
+		return self.user.username
+
+class teacherprofile(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	bio = models.CharField(max_length=150, blank=True)
+	profile_pic = models.ImageField(upload_to=user_directory_path_profile,verbose_name="Profile Picture", blank=True)
+	topic = models.CharField(max_length=50, null=True, blank=True)
+	mobile = models.CharField(max_length=50, null=True, blank=True)
+	url = models.CharField(max_length=80, null=True, blank=True)
+	url1 = models.CharField(max_length=80, null=True, blank=True)
+	teacher = 'teacher'
+	user_types = [
+        (teacher, 'teacher'),
+    ]
+	user_type = models.CharField(max_length=50, choices=user_types, default=teacher)
 	def __str__(self):
 		return self.user.username
 

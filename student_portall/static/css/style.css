@@ -16,6 +16,9 @@ body{
 .icon-block .material-icons {
 	font-size: inherit;
 }
+.logo{
+  font-family: 'Roboto', sans-serif;
+}
 #intro {
   height: 100%;
 }
@@ -108,6 +111,14 @@ body{
 }
 #cate-bg{
   background-image: url(../img/category.jpg);
+  background-repeat: no-repeat;
+  background-size: 1350px 500px;
+  height: 400px;
+  background-position: top;
+  background-attachment: fixed;
+}
+#home-bg{
+  background-image: url(../img/header.jpg);
   background-repeat: no-repeat;
   background-size: 1350px 500px;
   height: 400px;

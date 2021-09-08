@@ -2,7 +2,7 @@ from django import forms, template
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.base import View
 from django.views.generic import CreateView
-from authy.forms import SignupForm, ChangePasswordForm, EditProfileForm,TeacherUserform,TeacherProfileInfoForm
+from authy.forms import SignupForm, ChangePasswordForm, EditProfileForm,TeacherUserform,UserProfileInfoForm
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -241,23 +241,53 @@ def EditProfile(request):
 
 	return render(request, 'registration/edit_profile.html', context)
 
-def register(request):
-	if request.method == 'POST':
-		user_form = SignupForm(request.POST)
-		if user_form.is_valid():
-			username = user_form.cleaned_data.get('username')
-			email = user_form.cleaned_data.get('email')
-			password = user_form.cleaned_data.get('password')
-			User.objects.create_user(username=username, email=email, password=password)
-			return redirect('teacherinfo')
-	else:
-		user_form = SignupForm()
-	
-	context = {
-		'user_form':user_form,
-	}
 
-	return render(request, 'registration/registration.html', context)
+def register(request):
+
+    registered = False
+
+    if request.method == "POST":
+        user_form = SignupForm(data=request.POST)
+        profile_form = UserProfileInfoForm(data=request.POST)
+        
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+
+            registered = True
+        else:
+            print(user_form.errors, profile_form.errors)
+
+    else:
+        user_form = SignupForm()
+        profile_form = UserProfileInfoForm()
+
+    return render(request, 'registration/registration.html',{'registered':registered,'user_form':user_form,'profile_form':profile_form})
+
+
+
+# def register(request):
+# 	if request.method == 'POST':
+# 		user_form = TeacherUserform(request.POST)
+# 		if user_form.is_valid():
+# 			username = user_form.cleaned_data.get('username')
+# 			email = user_form.cleaned_data.get('email')
+# 			password = user_form.cleaned_data.get('password')
+# 			User.objects.create_user(username=username, email=email, password=password)
+# 			return redirect('teacherinfo')
+# 	else:
+# 		user_form = TeacherUserform()
+	
+# 	context = {
+# 		'user_form':user_form,
+# 	}
+
+# 	return render(request, 'registration/registration.html', context)
 
 def teacherinfo(request):
 	user = request.user.id
