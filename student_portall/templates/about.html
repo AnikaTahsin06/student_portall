@@ -6,9 +6,9 @@
 <header id="about-bg">
   <div class="section no-pad-bot" id="index-banner">
     <div>
-      <br><br>
-      <h2 class="header orange-text center">About US</h2>
-      <h5 class="header col s12 light center">Learn without limits and build new skills with our courses.</h5>
+      <br><br><br>
+      <h2 class="header   center" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: rgb(16, 90, 80);">ABOUT US</h2>
+      <!-- <h5 class="header col s12 light center">Learn without limits and build new skills with our courses.</h5> -->
       <br>
     </div>
   </div>
@@ -17,46 +17,87 @@
 {% endblock %}
 
 {% block content %}
- <div class="containerteach">
+<div style="margin: 5%;">
+  <div class="col s12 center">   
+    <br>
+    <div class="section" style="background-color: rgba(92, 182, 140, 0.596); padding: 4%;">
+      <h4 class="center">About</h4>
+      <div class="divider"></div>
+      <h6 class="center">Brain Axis is a educational platform for superior online courses and eLearning services that help you develop useful skills and accomplish more in life. Our online courses are designed in collaboration with the best of industry experts and organizations in Bangladesh.</h6>
+      <br>
+      <h6>Learning is the source of human progress.
+
+        It has the power to transform our world
+        from illness to health,
+        from poverty to prosperity,
+        from conflict to peace.
+        
+        It has the power to transform our lives
+        for ourselves,
+        for our families,
+        for our communities.
+        
+        No matter who we are or where we are,
+        learning empowers us to change and grow
+        and redefine what’s possible.
+        That’s why access to the best learning is a right, not a privilege.</h6>
+        <br>
+        <h6>And that’s why Brain Axis is here.
+          We partner with the best Instructors
+          to bring the best learning
+          to every corner of our country</h6><br>
+          <h6>So that anyone, anywhere has the power to
+            transform their life through learning.</h6>
+            <br><br>
+    </div>
+  </div>
+</div>
+
+
+ <div style="margin: 8%;">
+  <h4 class="center" style="color: rgba(0, 41, 41, 0.657); font-family:sans-serif;">Our Honarable Instructors</h4>
+  <hr>
+  <div class="containerteach">
     {% for teacher in teachers %}
-     <div class="cardtch">
-         <div class="contenttch">
-            {% if teacher.user.profile.picture %}
-             <div class="imgboxtch">
-                 <img src="{{ teacher.user.profile.picture.url }}" alt="">
-             </div>
-             {% else %}
-             <div class="imgboxtch">
-                 <img src="{% static 'img/no_avatar.jpg' %}" alt="">
-             </div>
-             {% endif %}
-             <div class="contentboxtch">
-                 <h4>{{ teacher.user.first_name }} {{ teacher.user.last_name }}</h4>
-                 {% if teacher.user.profile.profile_info %}
-                 <h5>{{teacher.user.profile.profile_info}}</h5>
-                 {% else %}
-                 <h5>Software Engineer</h5>
-                 {% endif %}
-             </div>
-             <div class="scii">
-                <a href=""><img src="{% static 'img/facebook.png' %}" alt=""></a>
-                <a href=""><img src="{% static 'img/twitter.png' %}" alt=""></a>
-                <a href=""><img src="{% static 'img/linkedin.png' %}" alt=""></a>
-             </div>
-         </div>
-     </div>
+    <div class="col s12 m3">
+      <div class="card  cardtch" style="height: 480px;">
+        <div class="contenttch">
+           {% if teacher.user.profile.picture %}
+            <div class="imgboxtch">
+                <img src="{{ teacher.user.profile.picture.url }}" alt="">
+            </div>
+            {% else %}
+            <div class="imgboxtch">
+                <img src="{% static 'img/no_avatar.jpg' %}" alt="">
+            </div>
+            {% endif %}
+            <div class="contentboxtch">
+                <h4>{{ teacher.user.first_name }} {{ teacher.user.last_name }}</h4>
+                {% if teacher.user.profile.profile_info %}
+                <h5>{{teacher.user.profile.profile_info}}</h5>
+                {% else %}
+                <h5>Software Engineer</h5>
+                {% endif %}
+            </div>
+            <div class="scii" style="margin-top: 6%;">
+               <a href=""><img src="{% static 'img/facebook.png' %}" alt=""></a> 
+               <a href=""><img src="{% static 'img/twitter.png' %}" alt=""></a> 
+               <a href=""><img src="{% static 'img/linkedin.png' %}" alt=""></a>
+            </div>
+        </div>
+    </div>
+    </div>
+      
      {% endfor %}
  </div>
-
-
-
-
-
-
-
-
-
-
+ </div>
+<div style="margin: 5%;padding: 5%;">
+  <div class="col s12 center">
+    <h5 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: rgba(83, 64, 34, 0.938);">WANT TO BE AN INTRUCTOR IN OUR COMMUNITY ?</h5>
+    <br><br>
+    <a href="{% url 'register'%}" class="btn btn-large center" style="width: 70%;">Enter Here</a><br><br>
+  </div>
+</div>
 
 <!-- <section>
     <div class="teachercontain">

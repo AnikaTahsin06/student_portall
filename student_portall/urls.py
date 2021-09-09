@@ -30,6 +30,6 @@ urlpatterns = [
     path('<username>', UserProfile, name='profile'),
     path('', home, name='home'),
     path('dashboard/', index, name='index'),
-    path('abour/', about, name='about'),
+    path('about/', about, name='about'),
      
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -27,12 +27,14 @@
       {% if completed != True %}
       <div class="col s12 center-align">
         <br><br>
+        {% if user.profile.user_type == 'student' %}
         <a class="btn-large" href="{% url 'mark-page-as-done' course_id module_id page.id %}">
           <i class="material-icons">
             done
           </i>
           Mark as done
         </a>
+        {% endif %}
         <br><br>
       </div>
       {% endif %}

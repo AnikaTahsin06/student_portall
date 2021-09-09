@@ -1,36 +1,40 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="profilecard">
-    <div class="upper-container ">
-        {% if  profile.user.profile.banner %}
-          <img src="{{  profile.user.profile.banner.url }}">
-          {% else %}
-          <img src="{% static 'img/no_avatar.jpg' %}">
-          {% endif %}
-    </div>
-    <div class="lower-container">
-
+<div class="col s12"  style="margin-left: 5%; margin-right: 5%; margin-top: -6%; margin-bottom: 5%;padding-bottom: 6%;">
+    <div class="card"  style="background-color: rgb(218, 246, 218);">
+        <div class="card-image" style="height: 270px;">
+            {% if profile.user.profile.banner %}
+            <img src="{{ profile.user.profile.banner.url }}">
+            {% else %}
+            <img src="{% static 'img/nobanner.jpg' %}">
+            {% endif %}
+        </div>
+        <div class="card-action" style="height: 550px; margin-bottom: -12%;">
+            <div class="row">
+                <div class="col s4">
+                    {% if profile.user.profile.picture %}
+                    <img src="{{ profile.user.profile.picture.url }}" class="circle responsive-img">
+                    {% else %}
+                    <img src="{% static 'img/no_avatar.jpg' %}" class="circle responsive-img">
+                    {% endif %}
+                </div>
+                <div class="col s8">
+                    <h3>Profile Information</h3>
+                    <a href="{% url 'change_password' %}" style="color: rgb(35, 87, 129);"><i class="material-icons">settings_suggest</i>Change Password</a>
+                    <a href="{% url 'edit-profile' %}" style="color: rgb(14, 85, 45);"><i class="material-icons">mode</i>Edit Profile</a>  
+                    <hr>
+                    <p><span class="font-weight-bold">Name: </span> {{ nav_profile.user.first_name }} {{nav_profile.user.last_name }}</p>
+                    <p><span class="font-weight-bold">Username: </span> {{user.username}}</p>
+                    <p><span class="font-weight-bold">Email: </span> {{user.email}}</p>
+                    <p><span class="font-weight-bold">Location: </span> {{profile.location}}</p>
+                    <p><span class="font-weight-bold">Profile Info: </span> {{profile.profile_info}}</p>
+                    <p><span class="font-weight-bold">Joined on: </span> {{profile.created}}</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-<div class="col-md-4">
-    <div class="container">
-        {% if  profile.user.profile.banner %}
-          <img src="{{  profile.user.profile.banner.url }}">
-          {% else %}
-          <img src="{% static 'img/no_avatar.jpg' %}">
-          {% endif %}
-    </div>
-    <h3>Detail Information</h3><li><a href="{% url 'edit-profile' %}"><i class="material-icons">menu_book</i>Edit Profile</a></li><hr>
-    <p><span class="font-weight-bold">Name: </span> {{ nav_profile.user.first_name }} {{ nav_profile.user.last_name }}</p>
-    <p><span class="font-weight-bold">Username: </span> {{user.username}}</p>
-    <p><span class="font-weight-bold">Email: </span> {{user.email}}</p>
-    <p><span class="font-weight-bold">Location: </span> {{profile.location}}</p>
-    <p><span class="font-weight-bold">Profile Info: </span> {{profile.profile_info}}</p>
-    <p><span class="font-weight-bold">Joined on: </span> {{profile.created}}</p>
-</div>
-
-
+ 
  
 {% endblock %}

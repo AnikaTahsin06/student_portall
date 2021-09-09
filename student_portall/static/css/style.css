@@ -133,6 +133,14 @@ body{
   background-position: top;
   background-attachment: fixed;
 }
+#teacherreg-bg{
+  background-image: url(../img/tee.jpg);
+  background-repeat: no-repeat;
+  background-size: 1350px 500px;
+  height: 400px;
+  background-position: top;
+  background-attachment: fixed;
+}
 
 /* contact page */
 .contactt h2{
@@ -178,7 +186,7 @@ footer .contain .sec.aboutus{
 }
 footer .contain   h2{
   position: relative;
-  color: burlywood;
+  color: rgb(211, 192, 169);
   font-weight: 500;
   font: 1.45em sans-serif;
   margin-bottom: 15px;
@@ -194,7 +202,7 @@ footer .contain h2:before{
 }
 footer .contain .sec.aboutus p{
   position: relative;
-  color: rgb(209, 186, 156);
+  color: rgb(211, 192, 169);
   font-weight: 500;
   margin-bottom: 15px;
 }
@@ -203,7 +211,7 @@ quickLinks{
   width: 25%;
 }
 .quickLinks ul li a{
-  color: rgb(209, 186, 156);
+  color: rgb(211, 192, 169);
   text-decoration: none;
   margin-bottom: 10px;
   display: inline-block;
@@ -270,9 +278,10 @@ quickLinks{
   height: 416px;
   padding: 60px 30px;
   margin: 20px;
-  background: #f4f4f4;
-  box-shadow: 0.6em 0.6em 1.2em #d2dce9, -0.5em -0.5em 1em #ffff;
-  border-radius: 20px;
+  background:rgb(218, 246, 218);
+  box-shadow: 0.6em 0.6em 1.2em #dde5ee, -0.5em -0.5em 1em rgb(238, 232, 232);
+  /* box-shadow: 0.6em 0.6em 1.2em #c3d0e0, -0.5em -0.5em 1em rgb(243, 237, 237); */
+  border-radius: 4px;
 
 }
 .containerteach .cardtch .contenttch{
@@ -311,13 +320,16 @@ quickLinks{
   text-align: center;
 }
  
-.containerteach .cardtch .contenttch .scii a{
+.containerteach .cardtch .contenttch .scii img{
   text-decoration: none;
   color: aquamarine;
   font-size: 30px;
-  margin: 10px;
+  margin: 8px;
+  height: 30px;
   transition: color 0.4s;
 }
 .containerteach .cardtch .contenttch .scii a:hover{
   color: rgb(42, 114, 90);
 }
+
+ 

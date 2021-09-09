@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'question',
     'completion',
     'direct',
-    'crispy_forms'
+    'crispy_forms',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -166,5 +167,10 @@ DEFAULT_FROM_EMAIL = 'anikabushra6543@gmail.com'
 
 MESSAGE_TAGS={
     messages.ERROR:'danger'
+}
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
 }
 
