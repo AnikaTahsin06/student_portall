@@ -2,67 +2,69 @@
 {% load static %}
 
 {% block content %}
-<div class="container">
-  <br><br><br>
-</div>
-<div class="row center-align">
-  <div class="col s6 offset-s3">
-    <div class="collapsible" style=" background-color: rgb(201, 216, 209); height: 600px;">
-      <br>
-      {% if messages %}
-      <div class="row">
-        {% for message in messages %}
-        <div class="col s12">
-          <span style="color: green; font-weight: bold;">{{ message }}</span>
-        </div>
-        {% endfor %}
-      </div>
-      {% endif %}
-      <form method="post" action="" role="form">
-        {% csrf_token %}
+<div style="padding: 4%;">
+  <div class="container">
+    <br><br><br>
+  </div>
+  <div class="row center-align">
+    <div class="col s6 offset-s3">
+      <div class="collapsible" style=" background-color: rgb(173, 224, 194); height: 580px;">
         <br>
-        <h3 class="title is-3">Login</h3>
-        <div class="input-field col s12">
-          {{ form.username }}
-          <label for="username" style="color: rgb(202, 198, 190);">Username</label>
-        </div>
-
-        <div class="input-field col s12">
-          {{ form.password }}
-          <label for="password">Password</label>
-        </div>
-
-        {% if form.errors %}
+        {% if messages %}
         <div class="row">
+          {% for message in messages %}
           <div class="col s12">
-            <span style="color: rgb(223, 47, 47); font-weight: bold;">Your username or password did not match.</span>
+            <span style="color: green; font-weight: bold;">{{ message }}</span>
           </div>
+          {% endfor %}
         </div>
         {% endif %}
-
-        <div class="field">
-          <p class="control">
-            <button type="submit" value="login" class="btn waves-effect waves-light" style="width: 40%;">
-              Login
-            </button>
-               
-          </p>
-          <a href="{% url 'password_reset' %}">forget password</a><br><br><br>
-        </div>
-
-        <input type="hidden" name="next" value="{{ next }}">
-
-
-
-        <a href="{% url 'signup' %}" class="btn waves-effect waves-light">Create an account</a>
-      </form>
-      <br>
-
+        <form method="post" action="" role="form" style="padding: 6%;">
+          {% csrf_token %}
+          <br>
+          <h3 class="title is-3" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;color: rgb(5, 102, 102);"><b>Login</b></h3>
+          <div class="input-field col s12">
+            {{ form.username }} 
+            <label for="username" style="color: rgb(202, 198, 190);">Username</label>
+          </div>
+  
+          <div class="input-field col s12">
+            {{ form.password }}
+            <label for="password">Password</label>
+          </div>
+  
+          {% if form.errors %}
+          <div class="row">
+            <div class="col s12">
+              <span style="color: rgb(223, 47, 47); font-weight: bold;">Your username or password did not match.</span>
+            </div>
+          </div>
+          {% endif %}
+  
+          <div class="field">
+            <p class="control">
+              <button type="submit" value="login" class="btn btn-large center" style="width: 100%; height: 50px;">
+                <b>Log In</b>
+              </button>
+                 
+            </p>
+            <a href="{% url 'password_reset' %}"><b>Forgotten password?</b></a><br><hr><br>
+          </div>
+  
+          <input type="hidden" name="next" value="{{ next }}">
+  
+  
+  
+          <a href="{% url 'signup' %}" class="btn btn-large center" style="width: 100%; height: 50px;"><b><span style="color: rgb(240, 233, 202);">New here ?</span> <span style="color: rgb(237, 245, 251);">Create an account</span></b></a>
+        </form>
+        <br>
+  
+      </div>
     </div>
   </div>
-</div>
-<div class="container">
-  <br><br><br>
+  <div class="container">
+    <br><br><br>
+  </div>
 </div>
  
 {% endblock %}

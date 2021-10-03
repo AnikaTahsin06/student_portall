@@ -33,18 +33,18 @@
           </li>
           {% if user.is_authenticated and user.profile.user_type == 'teacher' %}
           <li>
-            <a href="{% url 'my-courses' %}"><b>My Courses</b></a>
+            <a href="{% url 'my-courses' %}"><b><i class="material-icons left">nfc</i>My Courses</b></a>
           </li>
           {% elif user.is_authenticated and user.profile.user_type == 'student' %}
           <li>
-            <a href="{% url 'index' %}"><b>My Classes</b></a>
+            <a href="{% url 'index' %}"><b><i class="material-icons left">class</i>My Classes</b></a>
           </li>
           {% else %}
           <li>
-            <a href="{% url 'about' %}"><b>About</b></a>
+            <a href="{% url 'about' %}"><b><i class="material-icons left">emoji_people</i>About</b></a>
           </li>
           <li>
-            <a href="{% url 'categories' %}"><b>Categories</b></a>
+            <a href="{% url 'categories' %}"><b><i class="material-icons left">category</i>Categories</b></a>
           </li>
           {% endif %}
           <!-- <li>
@@ -62,7 +62,7 @@
           {% else %}
           <li>
             <!-- {% url 'register' %} -->
-            <a href="{% url 'login' %}"><b>Sign In</b></a>
+            <a href="{% url 'login' %}"><b><i class="material-icons left">login</i>Log In</b></a>
           </li>
           {% endif %}
         </ul>
@@ -113,7 +113,7 @@
     <li><a href="{% url 'categories' %}"><i class="material-icons">menu_book</i>Courses</a></li>
     <li><a href="{% url 'inbox' %}"><i class="material-icons">inbox</i>Inbox{% if directs_count %}<span
           class="new badge red">{{ directs_count }}</span>{% endif %}</a></li>
-    <li><a href=""><i class="material-icons">circle_notifications</i>Notifications</a></li>
+    <li><a href="{% url 'contact' %}"><i class="material-icons">near_me</i>Contact</a></li>
     <li>
       <div class="divider"></div>
     </li>
@@ -125,7 +125,7 @@
     </li>
     {% endif %}
 
-    <li><a href="{% url 'logout' %}"><i class="material-icons">power_off</i>Log out</a></li>
+    <li><a href="{% url 'logout' %}"><i class="material-icons">logout</i>Log out</a></li>
   </ul>
   {% endif %}
 

@@ -91,12 +91,12 @@ class TeacherUserform(UserCreationForm):
         return email
 
 class UserProfileInfoForm(forms.ModelForm):
-	bio = forms.CharField(required=False)
-	topic = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
-	mobile = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
-	url = forms.URLField(widget=forms.TextInput(), max_length=60, required=False)
-	url1 = forms.URLField(widget=forms.TextInput(), max_length=60, required=False)
-	plans = forms.CharField(widget=forms.TextInput(), max_length=260, required=False)
+	Your_Bio = forms.CharField(required=False)
+	What_topic_do_you_want_to_teach = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
+	Your_Mobile_no = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
+	URL_of_your_resume = forms.URLField(widget=forms.TextInput(), max_length=60, required=False)
+	url_of_your_LinkedIn_profile = forms.URLField(widget=forms.TextInput(), max_length=60, required=False)
+	Tell_us_a_bit_about_your_plans = forms.CharField(widget=forms.TextInput(), max_length=260, required=False)
 
 	Nonee = 'None'
 	month1 = '6 Months'
@@ -113,16 +113,16 @@ class UserProfileInfoForm(forms.ModelForm):
 		(month4, '24 Months'),
 		(last, 'More than 2 years of experience'),
 	]
-	experienc = forms.ChoiceField(required=True, choices=experience)
+	Teaching_Experience = forms.ChoiceField(required=True, choices=experience)
 	teacher = 'teacher'
 	user_types = [
          
         (teacher, 'teacher'),
     ]
-	user_type = forms.ChoiceField(required=True, choices=user_types)
+	User_Type = forms.ChoiceField(required=True, choices=user_types)
 	class Meta():
 		model = teacherprofile
-		fields = ('bio', 'profile_pic', 'topic', 'mobile', 'url', 'url1', 'plans', 'experienc', 'user_type')
+		fields = ('Your_Bio',  'What_topic_do_you_want_to_teach', 'Your_Mobile_no', 'URL_of_your_resume', 'url_of_your_LinkedIn_profile', 'Tell_us_a_bit_about_your_plans', 'Teaching_Experience', 'User_Type')
 
 
 # class TeacherProfileInfoForm(forms.ModelForm):

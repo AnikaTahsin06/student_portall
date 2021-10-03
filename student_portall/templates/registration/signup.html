@@ -21,7 +21,7 @@
       <form method="post" action="" role="form">
         {% csrf_token %}
         <br>
-        <h3 class="title is-3">Create an account</h3>
+        <h3 class="title is-3"><b style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: rgb(5, 102, 102);">Create an account</b></h3>
         <div class="input-field col s12">
           {{ form.username }}
           <label for="username">Username</label>
@@ -45,11 +45,11 @@
         </div>
         <div class="field">
           <p class="control">
-            <button type="submit" name="action" class="btn waves-effect waves-light">
-              Create
+            <button type="submit" name="action" class="btn btn-large center" style="width: 100%; height: 50px;">
+              <b>Create</b>
             </button>
           </p>
-          <a href="{% url 'login' %}">If you have already an account then please LOGIN</a><br><br><br>
+          <a href="{% url 'login' %}"><b>If you have already an account then please LOGIN</b></a><br><br><br>
         </div>
       </form>
     </div>

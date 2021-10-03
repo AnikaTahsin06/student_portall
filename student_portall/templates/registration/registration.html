@@ -18,24 +18,42 @@
 {% block content %}
 
 {% load crispy_forms_tags %}  
-  
-  <!--Password Reset Confirm-->
-    <div class="container p-5">
-    {% if registered %}
-        <h1>Thank you for registering. Now fill-up this form</h1>
-        <hr>
-        <a class="btn-large orange" href="{% url 'home' %}">Enter</a>
-    {% else %}
-	    <h2 class="font-weight-bold mt-3">Teacher registration form</h2>
-		<hr>
-        <p>Please enter your basic informations.</p>
-        <form method="POST">
-            {% csrf_token %}
-            {{ user_form|crispy }}
-            {{ profile_form|crispy }}                   
-            <button class="btn btn-large" type="submit">APPLY</button>
-        </form>
-    {% endif %}
+
+<div class="row ">
+  <div class="col s12">
+    <div class="collapsible" style="margin-top: 6%; margin-right: 20%; margin-left: 20%; margin-bottom: 10%; background-color: rgb(187, 235, 187);">
+      <!--Password Reset Confirm-->
+    <div class="container p-5" style="padding: 4%;">
+      {% if registered %}
+          <h1 style="font-family: 'Courier New', Courier, monospace; color: cadetblue;">Thank you for registering. Now fill-up this form</h1>
+          <hr>
+          <!-- <a class="btn-large orange" href="{% url 'home' %}">Enter</a> -->
+      {% else %}
+        <h4 class="font-weight-bold mt-3  center" style="font-family: 'Courier New', Courier, monospace; color:rgb(30, 86, 88);"><b>Apply To Be An Instructor</b></h4>
+      <hr>
+          <p>Please enter your basic informations.</p>
+          <form method="POST">
+              {% csrf_token %}
+               
+                <div class="row">
+                  
+                    <h4><b>{{ user_form|crispy }}</b></h4>
+                    <h4><b>{{ profile_form|crispy }}</b></h4>
+                   
+                </div>
+                 
+               
+               
+                   
+              <br>               
+              <button class="btn btn-large" type="submit">APPLY</button>
+          </form>
+      {% endif %}
+      </div>
     </div>
+  </div>
+</div>
+  
+   
 
 {% endblock %}
